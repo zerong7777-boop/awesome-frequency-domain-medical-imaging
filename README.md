@@ -626,47 +626,298 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 ## 6. Self-supervised / Pretraining / Domain Generalization
 
 ### 6.1 Frequency-based SSL objectives
-- <!-- spectral contrastive, spectral consistency, cross-view spectral agreement -->
+
+- **FreMIM: Fourier Transform Meets Masked Image Modeling for Medical Image Segmentation** (WACV, 2024) — MIM-style pretraining in the Fourier domain: masks image patches and predicts missing low-/high-frequency spectra with multi-stage supervision to learn better dense representations.  
+  `Tags:` [FFT][SSL][MIM][MultiScale] | `Task:` SSL-Seg | `Backbone:` ViT/Hybrid  
+  `Paper:` [[WACV 2024](https://openaccess.thecvf.com/content/WACV2024/html/Wang_FreMIM_Fourier_Transform_Meets_Masked_Image_Modeling_for_Medical_Image_WACV_2024_paper.html)] [[arXiv](https://arxiv.org/abs/2304.10864)] [[Code](https://github.com/Rubics-Xuan/FreMIM)]
+
+- **FRCNet: Frequency and Region Consistency for Semi-supervised Medical Image Segmentation** (MICCAI, 2024) — Adds frequency-domain consistency loss (aligning Fourier spectra of predictions under strong/weak augmentation) plus region-level consistency for unlabeled data.  
+  `Tags:` [FFT][SSL][Consistency][Loss] | `Task:` Semi-SL Seg | `Backbone:` Plug-in (U-Net / Swin / others)  
+  `Paper:` [[MICCAI 2024](https://papers.miccai.org/miccai-2024/340-Paper0245.html)]
+
+- **AdaptFRCNet: Semi-supervised Adaptation of Pre-trained Model with Frequency and Region Consistency** (Medical Image Analysis, 2025) — Extends FRCNet to adapt pre-trained / foundation models to new domains, enforcing frequency + region consistency on unlabeled target data.  
+  `Tags:` [FFT][SSL][Consistency][Adapt] | `Task:` SSL/Adapt Seg | `Backbone:` Plug-in (Pretrained)  
+  `Paper:` [[MedIA 2025](https://www.sciencedirect.com/science/article/abs/pii/S1361841525001732)]
+
+- **Semi-Supervised Medical Image Segmentation Based on Frequency Domain Aware Stable Consistency Regularization** (Journal of Imaging Informatics in Medicine, 2025) — Designs frequency-domain–aware consistency terms to stabilise pseudo-label training by aligning spectral statistics between differently augmented views.  
+  `Tags:` [FFT][SSL][Consistency][Loss] | `Task:` Semi-SL Seg | `Backbone:` CNN/U-Net  
+  `Paper:` [[JIIM 2025](https://link.springer.com/article/10.1007/s10278-025-01397-7)]
+
+- **A Self-Supervised Framework for Improved Generalisability in Ultrasound B-mode Image Segmentation** (Biomedical Signal Processing and Control, 2026) — Ultrasound SSL with relation-contrastive objectives and domain-inspired pretext tasks; uses combined spatial + frequency augmentations to learn robust encoders.  
+  `Tags:` [FFT][SSL][Contrastive][US] | `Task:` SSL-Seg (US) | `Backbone:` CNN/ResUNet  
+  `Paper:` [[BSPC 2026](https://www.sciencedirect.com/science/article/pii/S1746809425016003)] [[arXiv](https://arxiv.org/abs/2502.02489)]
+
 
 ### 6.2 Frequency augmentation & invariance
-- <!-- frequency masking, band-stop, spectrum mixup, wavelet dropout -->
 
-### 6.3 Robustness under domain shift
-- <!-- scanner/protocol shift, style-frequency disentanglement, cross-site generalization -->
+- **Fourier-based Augmentation with Applications to Domain Generalization (AmpMix/FACT)** (Pattern Recognition, 2023) — Generic Fourier-based framework for DG: linearly mixes amplitude spectra (AmpMix) while keeping phase, plus multi-view consistency training; includes medical segmentation as a benchmark scenario.  
+  `Tags:` [FFT][Aug][Consistency][DG] | `Task:` SSL/DG (Generic + Med) | `Backbone:` Backbone-agnostic  
+  `Paper:` [[PR 2023](https://dl.acm.org/doi/10.1016/j.patcog.2023.109474)]
+
+- **Random Amplitude Mixup (RAM) for Generalizable Medical Image Segmentation** (ECCV, 2022) — Perturbs low-frequency amplitude of source images to encourage amplitude-invariant representations and improve cross-domain segmentation.  
+  `Tags:` [FFT][Aug][DG] | `Task:` DG-Seg | `Backbone:` Plug-in (U-Net / DeepLab / etc.)  
+  `Paper:` [[ECCV 2022](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136810415.pdf)]
+
+- **Source-Free Domain Adaptation for Medical Image Segmentation with Fourier Style Mining (FSM)** (Medical Image Analysis, 2022) — Decomposes amplitude spectra into “transferable” and “domain-specific” styles, then performs source-free DA using mined style banks.  
+  `Tags:` [FFT][Aug][DA][SFDA] | `Task:` DA-Seg | `Backbone:` Plug-in (CNN/Transformer)  
+  `Paper:` [[MedIA 2022](https://www.sciencedirect.com/science/article/pii/S1361841522001851)]
+
+- **A Self-Supervised Framework for Improved Generalisability in Ultrasound B-mode Image Segmentation** (BSPC, 2026) — Uses a toolbox of spatial + frequency augmentations as pretext transformations (e.g., frequency filtering, phase perturbation) to learn representations invariant to scanner- and operator-induced artifacts.  
+  `Tags:` [FFT][Aug][SSL][US] | `Task:` SSL-Seg | `Backbone:` CNN/ResUNet  
+  `Paper:` [[BSPC 2026](https://www.sciencedirect.com/science/article/pii/S1746809425016003)] [[arXiv](https://arxiv.org/abs/2502.02489)]
+
+- **Medical Frequency Domain Learning: Considering Inter-Class and Intra-Class Frequency for Medical Image Segmentation and Classification** (IEEE BIBM, 2021) — Introduces class-aware spectral perturbations and frequency regularizers to enforce invariance to nuisance style while keeping discriminative spectral bands.  
+  `Tags:` [FFT][Aug][Loss] | `Task:` Seg + Class | `Backbone:` CNN  
+  `Paper:` [[BIBM 2021](https://ieeexplore.ieee.org/document/9669443)]
+
+
+### 6.3 Robustness under domain shift (DG / DA / Federated)
+
+- **FedDG: Federated Domain Generalization on Medical Image Segmentation via Episodic Learning in Continuous Frequency Space** (CVPR, 2021) — Exchanges amplitude spectra across clients and performs continuous frequency-space interpolation plus episodic meta-learning to improve cross-hospital generalization.  
+  `Tags:` [FFT][DG][Fed] | `Task:` FedDG-Seg | `Backbone:` CNN/U-Net  
+  `Paper:` [[CVPR 2021](https://openaccess.thecvf.com/content/CVPR2021/html/Liu_FedDG_Federated_Domain_Generalization_on_Medical_Image_Segmentation_via_Episodic_CVPR_2021_paper.html)]
+
+- **Frequency-mixed Single-Source Domain Generalization for Medical Image Segmentation (FreeSDG)** (MICCAI, 2023) — Uses frequency-mixed augmentation to diversify style from a single labeled source, with regularizers to preserve semantic structure while varying appearance.  
+  `Tags:` [FFT][DG][Aug] | `Task:` SDG-Seg | `Backbone:` Plug-in (CNN/Transformer)  
+  `Paper:` [[MICCAI 2023](https://link.springer.com/chapter/10.1007/978-3-031-43901-8_13)]
+
+- **MFNet: Meta-learning based on Frequency-Space Mix for MRI Image Segmentation** (Frontiers in Oncology, 2023) — Mixes features in frequency space within a meta-learning loop to improve cross-scanner robustness for nasopharyngeal carcinoma MRI.  
+  `Tags:` [FFT][DG][Meta][Mix] | `Task:` DG-Seg (MRI) | `Backbone:` CNN/UNet  
+  `Paper:` [[Front Oncol 2023](https://www.frontiersin.org/articles/10.3389/fonc.2023.1247263/full)]
+
+- **Domain-Specific Convolution and High-Frequency Reconstruction-based Unsupervised Domain Adaptation for Medical Image Segmentation** (MICCAI, 2022) — Introduces domain-specific convolution branches and high-frequency reconstruction losses to better align structural details across domains in UDA.  
+  `Tags:` [FFT][DA][Recons] | `Task:` UDA-Seg | `Backbone:` CNN/UNet  
+  `Paper:` [[MICCAI 2022](https://link.springer.com/chapter/10.1007/978-3-031-16434-7_76)]
+
+- **MoreStyle: Relax Low-frequency Constraint of Fourier-based Image Reconstruction in Generalizable Medical Image Segmentation** (MICCAI, 2024) — Revisits Fourier-based reconstruction for SDG, relaxing “low-frequency only” constraints and adding uncertainty-aware weighting to strengthen robustness on multi-site fundus and prostate segmentation.  
+  `Tags:` [FFT][DG][Aug][Recons] | `Task:` SDG-Seg | `Backbone:` Plug-in (CNN/Transformer)  
+  `Paper:` [[MICCAI 2024](https://papers.miccai.org/miccai-2024/paper/0782_paper.pdf)] [[Code](https://github.com/Maxwell-Zhao/MoreStyle)]
+
 
 ---
 
 ## 7. Foundation Models
 
 ### 7.1 Segmentation FM + Frequency Adapters
-- <!-- FM + spectral adapters / LoRA-style freq adapters / plug-in gating -->
+
+- **I-MedSAM: Implicit Medical Image Segmentation with Segment Anything** — ECCV 2024  
+  Leverages a SAM-based encoder with a frequency adapter that aggregates high-frequency information in the spectral domain and an implicit neural representation (INR) decoder for continuous masks.  
+  `Tags:` [FFT][Adapter][HighFreq][INR] | `Task:` Seg | `Backbone:` SAM + INR  
+  [[ECCV 2024](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/01503.pdf)] [[arXiv](https://arxiv.org/abs/2311.17081)] [[code](https://github.com/ucwxb/I-MedSAM)]
+
+- **FreqSAM2-UNet: Adapter Fine-Tuning Frequency-Aware Network of SAM2 for Universal Medical Segmentation** — ICIC 2025 (LNCS)  
+  Freezes the SAM2 Hiera encoder and adds frequency-aware adapters plus adaptive high/low-pass filters during feature fusion to preserve high-frequency boundaries.  
+  `Tags:` [FFT][Adapter][Hi/LoPass] | `Task:` Seg | `Backbone:` SAM2 + U-Net  
+  [[ICIC 2025](https://link.springer.com/chapter/10.1007/978-981-95-0036-9_26)]
+
+- **UltraSam: A Foundation Model for Ultrasound using Large Open-Access Segmentation Datasets** — Expert Systems with Applications, 2025  
+  SAM-style ultrasound foundation model trained on US-43d; combines prompt-conditioned segmentation with modality-specific features (including frequency-domain cues) and supports prompted classification.  
+  `Tags:` [FFT?][Prompt][FM][Ultrasound] | `Task:` Seg / Cls | `Backbone:` SAM-style ViT  
+  [[ESWA 2025](https://www.sciencedirect.com/science/article/abs/pii/S0957417425038382)] [[arXiv](https://arxiv.org/abs/2411.16222)] [[code](https://github.com/CAMMA-public/UltraSam)]
+
+- **FreqFiT: Frequency Strikes Back – Boosting Parameter-Efficient Foundation Model Adaptation for Medical Imaging** — MICCAI 2025 (Oral)  
+  Inserts an FFT-based fine-tuning block between ViT layers to modulate token spectra, improving PEFT (e.g., LoRA) when adapting MedMAE / DINOv2-style vision FMs for 2D/3D medical segmentation and classification.  
+  `Tags:` [FFT][PEFT][Adapter][GlobalContext] | `Task:` Seg / Cls | `Backbone:` ViT / FM  
+  [[MICCAI 2025](https://papers.miccai.org/miccai-2025/paper/3066_paper.pdf)] [[arXiv](https://arxiv.org/abs/2411.19297)] [[code](https://github.com/tsly123/FreqFiT_medical)]
+
+- **VP-SAM: Video Polyp Segmentation with Fourier Spectrum-guided SAM Adapters** — ECCV 2024  
+  Uses Fourier amplitude-based semantic disentanglement adapters on top of SAM for colonoscopy video segmentation; a prototype for frequency-guided prompting around a segmentation FM.  
+  `Tags:` [FFT][Adapter][Video][Polyp] | `Task:` Seg | `Backbone:` SAM  
+  [[ECCV 2024](https://www.ecva.net)]  <!-- official link to be filled once stable -->
+  
+- **RobustSAM: Degradation-Robust Segment Anything via Fourier Degradation Suppression** — CVPR 2024  
+  Adds a Fourier Degradation Suppression (FDS) module to SAM to mitigate blur/noise and distribution shift, improving robustness of FM-based segmentation under degraded imaging — potentially useful for low-dose / noisy medical scans.  
+  `Tags:` [FFT][Robust][Adapter] | `Task:` Generic Seg | `Backbone:` SAM  
+  [[CVPR 2024](https://openaccess.thecvf.com)]  <!-- generic FM + Fourier robustness -->
+
 
 ### 7.2 Reconstruction / Diffusion FM + Frequency Constraints
-- <!-- diffusion priors with spectral constraints / frequency-guided sampling -->
+
+- **High-Frequency Space Diffusion Model for Accelerated MRI** — IEEE TMI, 2024  
+  Designs a diffusion process directly in high-frequency k-space, adding multi-scale HF noise during forward SDE and reconstructing via reverse SDE; effectively a frequency-structured diffusion prior for MRI.  
+  `Tags:` [k-space][HF][Diffusion][Recon] | `Task:` MRI Recon | `Backbone:` Score-based Diffusion  
+  [[IEEE TMI 2024](https://arxiv.org/pdf/2208.05481.pdf)] [[code](https://github.com/Aboriginer/HFS-SDE)]
+
+- **FilterDiff: Noise-Free Frequency-Domain Diffusion Models for Accelerated MRI Reconstruction** — MICCAI 2025  
+  Models the diffusion process as a learned frequency-domain filtering operation (instead of Gaussian noise injection), aligning the forward / reverse process with MRI acquisition and enforcing spectral fidelity.  
+  `Tags:` [FFT][Filter][Diffusion][k-space] | `Task:` MRI Recon | `Backbone:` Frequency-domain Diffusion  
+  [[MICCAI 2025](https://papers.miccai.org/miccai-2025/paper/1256_paper.pdf)]
+
+- **Fourier Diffusion Models: A Method to Control MTF and NPS in Medical Imaging** — 2025  
+  Parameterizes diffusion models in the Fourier domain to explicitly control modulation transfer function (MTF) and noise power spectrum (NPS), enabling reconstruction FMs whose spatial resolution / noise characteristics are tunable by design.  
+  `Tags:` [Fourier][MTF][NPS][Theory] | `Task:` Recon / Sim | `Backbone:` Diffusion (Fourier-param.)  
+  [[Journal Article](https://pmc.ncbi.nlm.nih.gov/articles/PMC12619680/)]
+
+- **Zero-shot Medical Image Translation via Frequency-Guided Diffusion Models (FGDM)** — IEEE TMI, 2023  
+  Introduces frequency-domain filters as guidance signals in the diffusion process for cross-modality CT/CBCT/MR translation under zero-shot setting, preserving anatomical structures via spectral constraints.  
+  `Tags:` [FFT][Filter][Translation][ZeroShot] | `Task:` Cross-modality Translation / Recon | `Backbone:` Diffusion  
+  [[IEEE TMI 2023](https://arxiv.org/abs/2304.02742)] [[code](https://github.com/Kent0n-Li/FGDM)]
+
+- **Prior Frequency Guided Diffusion Model for Limited Angle (LA)-CBCT Reconstruction (PFGDM)** — Physics in Medicine & Biology, 2024 (to appear)  
+  Conditions a diffusion prior on high-frequency information from prior CT scans; uses decaying HF conditioning to reconstruct LA-CBCT while preserving fine anatomical details.  
+  `Tags:` [FFT][Prior][k-space][Diffusion] | `Task:` CBCT Recon | `Backbone:` Conditional Diffusion  
+  [[arXiv 2024](https://arxiv.org/abs/2404.01448)]
+
+> You can treat this subsection as “frequency-aware diffusion / generative FMs for reconstruction / translation” and cross-reference Section 2 for more task-specific models.
+
 
 ### 7.3 VLM / Prompting + Frequency Priors
-- <!-- promptable medical models w/ frequency priors (if applicable) -->
+
+- **FreqFiT (revisited)** — MICCAI 2025  
+  Frequency-based fine-tuning module for ViT FMs, compatible with visual prompt tuning / LoRA; naturally pairs with language-conditioned or report-conditioned medical FMs where visual backbone is ViT.  
+  `Tags:` [FFT][PEFT][PromptReady] | `Task:` Seg / Cls | `Backbone:` ViT FM  
+  [[MICCAI 2025](https://papers.miccai.org/miccai-2025/paper/3066_paper.pdf)] [[code](https://github.com/tsly123/FreqFiT_medical)]
+
+- **FMISeg: Frequency-domain Multi-modal Fusion for Language-guided Medical Image Segmentation** — MICCAI 2025  
+  Aligns vision and text features in the frequency domain for language-guided segmentation, providing a prototype of “frequency-aware vision–language FM” for medical imaging.  
+  `Tags:` [FFT][Fusion][VL][GuidedSeg] | `Task:` Lang-guided Seg | `Backbone:` Vision–Language Hybrid  
+  [[MICCAI 2025](https://papers.miccai.org/miccai-2025/paper/3678_paper.pdf)]
+
+- **FVP: Fourier Visual Prompting for Source-Free UDA of Medical Image Segmentation** — IEEE TMI, 2023  
+  Treats low-frequency Fourier perturbations as visual prompts injected into the input space of a frozen segmenter for source-free domain adaptation; a bridge between prompting and frequency priors.  
+  `Tags:` [FFT][Prompt][UDA] | `Task:` Seg (SFUDA) | `Backbone:` Frozen Seg + Freq Prompt  
+  [[IEEE TMI 2023](https://arxiv.org/abs/2304.13672)]
+
+- **UltraSam (prompted classification)** — ESWA, 2025  
+  Extends SAM-style segmentation FM to “prompted classification” by jointly decoding prompts and image features; while not explicitly frequency-prompted, it is a natural host for future frequency-aware prompts (e.g., combining with FreqFiT / FVP-like modules).  
+  `Tags:` [Prompt][FM][Ultrasound][Future-Freq] | `Task:` Prompted Cls / Seg | `Backbone:` SAM-style ViT  
+  [[ESWA 2025](https://www.sciencedirect.com/science/article/abs/pii/S0957417425038382)] [[arXiv](https://arxiv.org/abs/2411.16222)]
+
 
 ---
-
 ## 8. Datasets & Benchmarks
 
 ### Segmentation
-- Dataset — modality, target, metrics, notes
 
-### Reconstruction / SR
-- Dataset — MRI/CT, acceleration/low-dose setting, metrics
+- **BraTS (Brain Tumor Segmentation)** — Multi-institutional, multi-modal brain MRI (T1, T1c, T2, FLAIR).  
+  `Target:` Glioma subregions (ET/TC/WT)  
+  `Metrics:` Dice, HD95, sensitivity, specificity  
+  `Notes:` Long-running MICCAI challenge; standard 3D MRI benchmark for tumor segmentation, domain generalization, and frequency-based methods.  
+  [[BraTS 2020](https://www.med.upenn.edu/cbica/brats2020/)]
 
-### Denoising / Enhancement
-- Dataset — noise/artifact type, metrics
+- **Medical Segmentation Decathlon (MSD)** — 10 heterogeneous 3D CT/MR tasks (brain tumours, heart, liver, lung, pancreas, prostate, colon, hepatic vessels, spleen, hippocampus).  
+  `Target:` Organ / lesion segmentation across tasks  
+  `Metrics:` Dice, NSD / HD95  
+  `Notes:` Large-scale multi-organ, multi-modality benchmark; widely used to test cross-task generalization, domain shift, and frequency-aware modules.  
+  [[MSD](http://medicaldecathlon.com/)]
 
-### Registration
-- Dataset — motion/deformation setting, metrics
+- **ACDC (Automated Cardiac Diagnosis Challenge)** — Cine cardiac MRI from multiple patients.  
+  `Target:` LV / RV / myocardium segmentation, plus diagnosis labels  
+  `Metrics:` Dice, Hausdorff distance, EF / volume error  
+  `Notes:` Classic cardiac MRI segmentation dataset, often used for semi-/self-supervised and domain-generalization studies.
+
+- **KiTS19 / KiTS21 (Kidney Tumor Segmentation)** — Abdominal CT volumes from multiple centers.  
+  `Target:` Kidney, tumor (and cysts/other structures in KiTS21)  
+  `Metrics:` Dice, HD95  
+  `Notes:` Standard benchmark for renal tumour segmentation; challenging shapes and class imbalance.
+
+- **ISIC 2018–2020 (Skin Lesion Analysis)** — Dermoscopic RGB images.  
+  `Target:` Lesion segmentation, dermoscopic attributes, lesion classification  
+  `Metrics:` Jaccard / Dice, pixel-level accuracy, AUC  
+  `Notes:` Widely used for evaluating boundary-sensitive models, spectral/texture-aware networks, and joint seg+cls setups.
+
+- **Multi-site Prostate MRI (e.g., PROMISE12, MSD Task05, and extended cohorts)** — Prostate T2 / mp-MRI from different vendors and protocols.  
+  `Target:` Prostate gland, peripheral / transition zones, lesions  
+  `Metrics:` Dice, HD95, surface distance  
+  `Notes:` Strong scanner/protocol variability; common testbed for domain generalization and Fourier-style style-transfer / augmentation.
+
+- **Retinal Fundus Packs (DRISHTI-GS, RIM-ONE r3, REFUGE, DRIVE, STARE, CHASE_DB1, HRF, PAPILA, etc.)** — 2D color fundus photographs.  
+  `Target:` Optic disc/cup, vessels, macula, lesions, glaucoma labels  
+  `Metrics:` Dice / Jaccard (OD/OC, vessels), AUC (glaucoma), sensitivity / specificity  
+  `Notes:` Frequently used in frequency-based DG / DA works (e.g., Fourier mixing, amplitude-style transfer) due to strong inter-dataset appearance differences.
+
+
+### Reconstruction / Super-Resolution
+
+- **fastMRI (Knee / Brain)** — Raw multi-coil k-space and reconstructed images for knee and brain MRI at various acceleration factors.  
+  `Modality:` MRI  
+  `Setting:` Accelerated reconstruction, under-sampled k-space  
+  `Metrics:` NMSE, PSNR, SSIM, perceptual metrics  
+  `Notes:` Main public benchmark for deep MRI reconstruction; many k-space and frequency-aware recon models are evaluated here.  
+  [[fastMRI](https://fastmri.med.nyu.edu/)]
+
+- **Calgary–Campinas (CC-359 and related challenges)** — 3D T1-weighted brain MRI (multiple vendors and field strengths).  
+  `Modality:` MRI  
+  `Setting:` Accelerated recon, resolution enhancement, cross-scanner robustness  
+  `Metrics:` PSNR, SSIM, NMSE, brain-structure similarity measures  
+  `Notes:` Common benchmark for 3D MRI SR/reconstruction and frequency-domain priors.  
+  [[Calgary–Campinas](https://sites.google.com/view/calgary-campinas-dataset)]
+
+- **LoDoPaB-CT (Low-Dose Parallel Beam CT)** — Simulated low-dose chest CT from LIDC-IDRI.  
+  `Modality:` CT  
+  `Setting:` Low-dose reconstruction with sparse/noisy projections  
+  `Metrics:` PSNR, SSIM, NMSE  
+  `Notes:` Standard low-dose CT reconstruction benchmark; frequently used with iterative and frequency-based reconstruction methods.  
+  [[LoDoPaB-CT](https://zenodo.org/records/3384092)]
+
+- **AAPM 2016 Low Dose CT Grand Challenge (LDCT-and-Projection-Data)** — Abdominal contrast-enhanced CT with full-dose vs quarter-dose data.  
+  `Modality:` CT  
+  `Setting:` Low-dose (quarter-dose) reconstruction and denoising  
+  `Metrics:` PSNR, SSIM, NMSE, plus detection/reading performance in some studies  
+  `Notes:` Widely adopted for low-dose CT reconstruction and deep denoising.
+
+- **Paired 3T–7T Hippocampal Subfield Dataset** — Paired 3T/7T multimodal brain MRI with manual hippocampal subfield labels on 7T.  
+  `Modality:` MRI  
+  `Setting:` 3T→7T synthesis / SR, high-field reconstruction  
+  `Metrics:` PSNR, SSIM (image similarity), Dice (subfield segmentation)  
+  `Notes:` Good testbed for super-resolution and high-frequency detail recovery with spectral priors.
+
+
+### Denoising / Enhancement / Artifact Reduction
+
+- **LoDoPaB-CT & AAPM LDCT** — Often reused specifically for image-space denoising and enhancement (in addition to full reconstruction).  
+  `Noise / Artifact:` Quantum noise, low-dose artifacts  
+  `Metrics:` PSNR, SSIM, NMSE, reader study scores  
+  `Notes:` Baseline benchmarks for frequency-aware denoising (wavelet / Fourier losses, NPS-based losses, etc.).
+
+- **Ultrasound Nerve Segmentation (UNS)** — Brachial plexus ultrasound (Kaggle).  
+  `Noise / Artifact:` Speckle noise, shadowing  
+  `Metrics:` PSNR, SSIM (denoising), Dice (nerve segmentation)  
+  `Notes:` Frequently used in works that jointly evaluate despeckling and downstream segmentation.
+
+- **PICMUS / CUBDL Ultrasound Beamforming Data** — Plane-wave RF data and B-mode reference images.  
+  `Noise / Artifact:` Speckle, side lobes, clutter; beamforming artifacts  
+  `Metrics:` CNR, spatial resolution, geometric distortion, speckle statistics  
+  `Notes:` Classic benchmarks for ultrasound beamforming and denoising, especially relevant for k-space / frequency-domain methods.
+
+- **HC18 / BUSI / Fetal-head & Breast Ultrasound datasets** — Public ultrasound datasets for fetal head circumference, breast lesion analysis, etc.  
+  `Noise / Artifact:` Medical US speckle, low contrast, acquisition artifacts  
+  `Metrics:` PSNR, SSIM (denoising), Dice / IoU (segmentation), AUC (diagnosis)  
+  `Notes:` Commonly used to test speckle suppression with preservation of diagnostically relevant edges and textures.
+
+
+### Registration / Motion / Deformation
+
+- **Learn2Reg (L2R) Suite** — Collection of registration tasks: OASIS/IXI brain MRI, abdominal CT, lung CT, etc.  
+  `Setting:` Inter-subject / intra-subject registration across multiple anatomies  
+  `Metrics:` Target Registration Error (TRE), Dice (warped labels), surface distance, Jacobian statistics  
+  `Notes:` Main deep-learning registration benchmark; spectrum-regularized and band-limited deformation models are often compared here.  
+  [[Learn2Reg datasets](https://learn2reg.grand-challenge.org/Datasets/)]
+
+- **COPDGene / DIR-Lab 4DCT lung registration** — Thoracic 4DCT and paired inhale/exhale CT scans with landmark annotations.  
+  `Setting:` Large-deformation lung motion (respiratory), 4D registration  
+  `Metrics:` TRE on landmarks, Dice for lung/lobe masks, Jacobian regularity  
+  `Notes:` Standard benchmark for motion-compensated CT and 4D registration, used by many classical and deep approaches.
+
+- **AbdomenCT (L2R Abdomen)** — 3D abdominal CT with multi-organ annotations (liver, spleen, kidneys, pancreas, vessels, etc.).  
+  `Setting:` Inter-subject abdominal registration  
+  `Metrics:` Dice, surface distance, TRE  
+  `Notes:` Tests registration quality under large inter-subject anatomical variability and strong intensity inhomogeneity.
+
+- **IXI Brain MRI** — Multi-center structural brain MRI (T1/T2/PD/MRA/DTI) of healthy subjects.  
+  `Setting:` Inter-subject registration, cross-site generalization  
+  `Metrics:` Dice for propagated anatomical labels, TRE  
+  `Notes:` Generic brain MRI dataset frequently used for registration, domain shift, and federated learning studies.  
+  [[IXI dataset](http://brain-development.org/ixi-dataset/)]
+
 
 ### Common Metrics
-- Seg: Dice, IoU, HD95, ASSD
-- Recon/SR: PSNR, SSIM, NMSE
-- Classif: AUC, ACC, F1
+
+- **Segmentation:** Dice coefficient, IoU / Jaccard index, 95th percentile Hausdorff distance (HD95), Average Symmetric Surface Distance (ASSD)  
+- **Reconstruction / SR / Denoising:** Peak Signal-to-Noise Ratio (PSNR), Structural Similarity Index (SSIM), Normalized Mean Squared Error (NMSE), sometimes perceptual metrics (e.g., LPIPS)  
+- **Classification / Detection / Diagnosis:** Area Under the ROC Curve (AUC), Accuracy, F1-score, Sensitivity, Specificity, calibration metrics (e.g., Expected Calibration Error, ECE)  
+- **Registration:** Target Registration Error (TRE, landmark distance), Dice of propagated labels, surface distance / ASSD, Jacobian determinant statistics (folding ratio, volume preservation)
+
 
 ---
 
