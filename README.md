@@ -938,33 +938,146 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 
 ## 10. Index
 
+> This section provides a **lightweight manual index** to complement the task-wise sections above.  
+> It is not exhaustive – it only lists representative entries per tag. Contributions are welcome.
+
 ### 10.1 Index by Frequency Transform
-- `[FFT]`: <!-- list paper links here -->
-- `[DWT]`:
-- `[DCT]`:
-- `[STFT]`:
-- `[Shearlet]`:
-- `[Curvelet]`:
-- `[LearnableFreq]`:
-- `[HybridFreq]`:
+
+- `[FFT]`  
+  - **Segmentation (Sec. 1)**:  
+    GFUNet (CBM 2023, Sec. 1.1), FFTMed (Sci Rep 2025, Sec. 1.1), PFESA (MICCAI 2025, Sec. 1.1),  
+    Frequency-domain attention Cascade U-Net (CBM 2023, Sec. 1.1), PFD-Net (CBM 2024, Sec. 1.2),  
+    RAM (ECCV 2022, Sec. 1.2 & 1.6), FRCNet / AdaptFRCNet (MICCAI 2024 / MedIA 2025, Sec. 1.6),  
+    FVP (IEEE TMI 2023, Sec. 1.6), FMISeg (MICCAI 2025, Sec. 1.4).  
+  - **Reconstruction / SR (Sec. 2)**:  
+    Hybrid frequency–spatial GAN for CT/MRI SR (Phys Med Biol 2023, Sec. 2.4),  
+    High-frequency space diffusion for accelerated MRI, Fourier / FilterDiff / PFGDM / FGDM-style models (Secs. 2.5 & 7.2).  
+  - **SSL / DG / UDA (Secs. 1.6 & 6)**:  
+    RAM, FVP, CAFDA and other Fourier amplitude/phase mixing methods.  
+  - **Foundation / Prompting (Sec. 7)**:  
+    FreqFiT (MICCAI 2025, Secs. 1.2 & 7.1), FMISeg (MICCAI 2025, Secs. 1.4 & 7.3), FVP (Sec. 7.3).
+
+- `[DWT]`  
+  - **Segmentation (Sec. 1)**:  
+    Wavelet U-Net (MICCAI 2020, Sec. 1.1), Wavelet U-Net++ (BSPC 2024, Sec. 1.1),  
+    WMREN (IJCAI 2025, Sec. 1.4), UWT-Net (MICCAI 2025, Sec. 1.4),  
+    Adaptive Wavelet-VNet (IEEE TMI 2024, Sec. 1.5), HFNM wavelet module (MICCAI 2025, Sec. 1.6),  
+    WMC-Net (Knowl-Based Syst 2025, Sec. 1.3).  
+  - **Reconstruction / SR (Sec. 2)**:  
+    Wavelet SR family (WMSR, WMRSR, etc., Sec. 2.1), wavelet-embedded CT SR (Radiat Phys Chem 2023, Sec. 2.1),  
+    DC-WCNN (ISBI 2020, Sec. 2.4), 3T→7T spatial + wavelet synthesis (MedIA 2020, Sec. 2.4).  
+  - **Transformers / Token mixing (Sec. 2.2)**:  
+    WaveFormer (MICCAI 2025, Sec. 1.2), WavTrans (MICCAI 2022, Sec. 2.2).
+
+- `[DCT]`  
+  - (Placeholder) Currently no explicitly **`[DCT]`-tagged** medical imaging entries are curated.  
+    DCT-based segmentation / reconstruction / denoising works are welcome as future additions.
+
+- `[STFT]`  
+  - (Placeholder) Reserved for works with explicit STFT-based representations  
+    (e.g., dynamic MRI / ultrasound time–frequency modeling). To be extended.
+
+- `[Shearlet]` / `[Curvelet]`  
+  - (Placeholder) Many classical CT/MRI reconstruction methods use these frames;  
+    only a few deep-learning hybrids with clear medical experiments are available. Planned for future curation.
+
+- `[LearnableFreq]` / `[HybridFreq]`  
+  - Learnable / hybrid frequency operators appear in several recent reconstruction and diffusion models  
+    (e.g., high-frequency space diffusion, hybrid Fourier–wavelet networks in Secs. 2.4–2.5 & 7.2).  
+    Tags will be populated as the list of such works grows.
+
+---
 
 ### 10.2 Index by Backbone
-- CNN:
-- ViT:
-- Mamba/SSM:
-- Hybrid:
-- Other:
+
+> Backbone-centric view – useful if you start from “I use CNN / ViT / Mamba, what frequency methods are typical?”.
+
+- **CNN (incl. U-Net / V-Net variants)**  
+  - **Segmentation**:  
+    Wavelet U-Net (MICCAI 2020), Wavelet U-Net++ (BSPC 2024), GFUNet (CBM 2023), FFTMed (Sci Rep 2025),  
+    PFESA (MICCAI 2025), frequency-attention Cascade U-Net (CBM 2023),  
+    Adaptive Wavelet-VNet (IEEE TMI 2024), Active Contour + frequency (Pattern Recognit 2025).  
+  - **Reconstruction / SR**:  
+    Wavelet SR family (WMSR / WMRSR / wavelet-embedded CT SR), DC-WCNN,  
+    3T→7T spatial+wavelet synthesis, hybrid frequency–spatial GAN for CT/MRI SR.  
+  - **Denoising / Enhancement**:  
+    CNN-based LDCT / MRI / ultrasound despeckling models with wavelet/Fourier losses in Sec. 3.1.
+
+- **ViT / Transformer**  
+  - **Segmentation**:  
+    WaveFormer (MICCAI 2025), EFMS-Net (MICCAI 2025), PFD-Net (CBM 2024),  
+    RAM (ECCV 2022, Transformer branch), FreqFiT adapters for ViT FMs.  
+  - **Reconstruction / SR**:  
+    WavTrans (MICCAI 2022), CFAFET and related SR Transformers (CMPB 2025).  
+  - **Foundation / Prompting**:  
+    FreqFiT (FM adapter), FMISeg (vision–language), UltraSam-style prompted models (Secs. 7.1–7.3).
+
+- **Mamba / SSM**  
+  - **Segmentation**:  
+    EM-Net, HybridMamba, BraTS-UMamba, WMC-Net (Secs. 1.3–1.4).  
+  - **SR / Reconstruction**:  
+    FGMamba, Deform-Mamba, GLMamba (Sec. 2.3), some of which naturally combine with frequency losses/priors.
+
+- **Hybrid (CNN + spectral / graph / multimodal)**  
+  - **Segmentation**:  
+    WMREN, UWT-Net, FMISeg, language-guided frequency fusion models (Sec. 1.4).  
+  - **Classification / Diagnosis**:  
+    Graph-/multimodal hybrids with spectral priors in Sec. 5.4.  
+  - **Generative / Diffusion**:  
+    Hybrid image–frequency GANs and diffusion FMs in Secs. 2.4–2.5 & 7.2.
+
+- **Other / Plug-in (classical, prompts, adapters)**  
+  - **Classical**: Active Contour + frequency (Pattern Recognit 2025).  
+  - **Plug-in modules**: FRCNet, AdaptFRCNet, RAM, FVP, CAFDA, HFNM and other frequency-based SSL / DG / UDA methods (Secs. 1.6, 6.1–6.3).  
+  - **FM adapters / prompts**: FreqFiT, FMISeg, FVP, UltraSam (Secs. 7.1–7.3).
+
+---
 
 ### 10.3 Index by Injection / Usage
-- `[Input]`:
-- `[Feature]`:
-- `[Attention]`:
-- `[TokenMix]`:
-- `[Loss]`:
-- `[Aug]`:
-- `[Selection]`:
-- `[Fusion]`:
-- `[Explain]`:
+
+> Grouped by *how* frequency information is injected or used.  
+> Tags follow the legend in Section 0.1.
+
+- `[Input]` — input-level transforms / pre-processing  
+  - RAM (ECCV 2022, frequency-domain interpolation), CAFDA (Fourier amplitude curriculum),  
+    FVP (Fourier visual prompting), and other Fourier amplitude/phase mixing methods in Secs. 1.6 & 6.2.
+
+- `[Feature]` — feature-level branches / spectral paths  
+  - CNN seg: GFUNet, FFTMed, frequency-attention Cascade U-Net, Wavelet U-Net / U-Net++ (Sec. 1.1).  
+  - ViT / Hybrid seg: WaveFormer, EFMS-Net, PFD-Net, FMISeg (Secs. 1.2 & 1.4).  
+  - Mamba seg: EM-Net, HybridMamba, BraTS-UMamba, WMC-Net (Sec. 1.3).  
+  - Recon / SR: most wavelet SR/recon networks and hybrid spatial+wavelet models in Secs. 2.1–2.4.
+
+- `[Attention]` — frequency-aware attention / mixers  
+  - Frequency-domain attention-guided Cascade U-Net (CBM 2023), PFD-Net (CBM 2024),  
+    CFAFET and related SR Transformers (Sec. 2.2), plus frequency-aware attention blocks in WaveFormer / EFMS-Net.
+
+- `[TokenMix]` — spectral token mixing  
+  - WaveFormer (DWT-based token mixing, Sec. 1.2) and related ViT/SSM models that mix tokens in a frequency-decomposed space.
+
+- `[Loss]` — spectral losses / regularization  
+  - FRCNet / AdaptFRCNet (frequency-consistency losses, Sec. 1.6),  
+    HFNM wavelet perturbation loss (MICCAI 2025, Sec. 1.6),  
+    NPS/MTF-aware diffusion models and LDCT/denoising works with explicit spectral loss terms (Secs. 2.5, 3.1–3.2).
+
+- `[Aug]` — frequency-domain augmentation  
+  - RAM (random amplitude mixup), CAFDA (curriculum Fourier transfer),  
+    frequency-based style/appearance mixing in fundus / multi-site MRI (Secs. 1.6, 3.1, 6.2),  
+    wavelet-based perturbations in HFNM.
+
+- `[Selection]` — adaptive transform selection / routing  
+  - Reserved for works that **adaptively choose or gate** transforms (e.g., frequency-gated Mamba, MoE-style spectral branches).  
+    Current candidates include FGMamba and related frequency-gated SSMs; more explicit routing methods will be tagged as they appear.
+
+- `[Fusion]` — spatial–frequency / multimodal fusion  
+  - WMREN, UWT-Net, HybridMamba, spatial+wavelet SR/recon networks, hybrid frequency–spatial GANs (Secs. 1.4, 2.4),  
+    FMISeg (vision–language frequency fusion), and multimodal graph/VLM hybrids in Secs. 5.4 & 7.2–7.3.
+
+- `[Explain]` — interpretability / analysis in frequency space  
+  - Active Contour + frequency (Pattern Recognit 2025, Sec. 1.5),  
+    HFNM wavelet perturbation analysis (MICCAI 2025, Sec. 1.6),  
+    and other works that explicitly visualize high-/low-frequency contributions in segmentation / reconstruction / denoising tasks.
+
 
 ---
 ## 11. Contributing
