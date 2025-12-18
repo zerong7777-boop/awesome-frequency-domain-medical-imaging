@@ -1,5 +1,4 @@
 # Awesome Frequency-Domain Methods for Medical Imaging
-> 频域变换（FFT / DWT / DCT / …）在医学影像不同任务中的方法、模块与实践总结（单文件仓库）。
 
 **Last updated:** 2025-12-18  
 
