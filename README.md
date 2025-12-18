@@ -6,62 +6,63 @@
 ---
 
 ## Table of Contents
-- [0. Scope & How to Use](#0-scope--how-to-use)
+- [0. Scope & How to Use](#0-scope-how-to-use)
 - [0.1 Tag Legend](#01-tag-legend)
   - [Frequency Transform Tags](#frequency-transform-tags)
-  - [Injection / Usage Tags](#injection--usage-tags)
-  - [Modality / Dim Tags](#modality--dim-tags)
+  - [Injection / Usage Tags](#injection-usage-tags)
+  - [Modality / Dim Tags](#modality-dim-tags)
   - [Entry Template](#entry-template)
 - [1. Segmentation](#1-segmentation)
   - [1.1 CNN-based](#11-cnn-based)
   - [1.2 ViT-based](#12-vit-based)
-  - [1.3 Mamba / SSM-based](#13-mamba--ssm-based)
+  - [1.3 Mamba / SSM-based](#13-mamba-ssm-based)
   - [1.4 Hybrid](#14-hybrid)
   - [1.5 Other Backbones](#15-other-backbones)
-  - [1.6 Backbone-agnostic / Plug-in Modules](#16-backbone-agnostic--plug-in-modules)
-- [2. Reconstruction & Super-Resolution](#2-reconstruction--super-resolution)
+  - [1.6 Backbone-agnostic / Plug-in Modules](#16-backbone-agnostic-plug-in-modules)
+- [2. Reconstruction & Super-Resolution](#2-reconstruction-super-resolution)
   - [2.1 CNN-based](#21-cnn-based)
   - [2.2 ViT-based](#22-vit-based)
-  - [2.3 Mamba / SSM-based](#23-mamba--ssm-based)
-  - [2.4 Hybrid](#24-hybrid)
-  - [2.5 Other Backbones](#25-other-backbones)
-  - [2.6 Backbone-agnostic / Plug-in Modules](#26-backbone-agnostic--plug-in-modules)
-  - [2.7 K-space / Complex-specific](#27-k-space--complex-specific)
-- [3. Denoising / Enhancement / Artifact Reduction](#3-denoising--enhancement--artifact-reduction)
+  - [2.3 Mamba / SSM-based](#23-mamba-ssm-based)
+  - [2.4 Hybrid (Spatial + Frequency / Multi-Branch)](#24-hybrid-spatial-frequency-multi-branch)
+  - [2.5 Other Backbones (Diffusion / GAN / Etc.)](#25-other-backbones-diffusion-gan-etc)
+  - [2.6 Backbone-agnostic / Plug-in Modules](#26-backbone-agnostic-plug-in-modules)
+  - [2.7 K-space / Complex-specific](#27-k-space-complex-specific)
+- [3. Denoising / Enhancement / Artifact Reduction](#3-denoising-enhancement-artifact-reduction)
   - [3.1 CNN-based](#31-cnn-based)
   - [3.2 ViT-based](#32-vit-based)
-  - [3.3 Mamba / SSM-based](#33-mamba--ssm-based)
-  - [3.4 Hybrid](#34-hybrid)
-  - [3.5 Other Backbones](#35-other-backbones)
-  - [3.6 Backbone-agnostic / Plug-in Modules](#36-backbone-agnostic--plug-in-modules)
-- [4. Registration / Motion / Deformation](#4-registration--motion--deformation)
+  - [3.3 Mamba / SSM-based](#33-mamba-ssm-based)
+  - [3.4 Hybrid (Multi-domain / Unrolled / Model-based + Deep)](#34-hybrid-multi-domain-unrolled-model-based-deep)
+  - [3.5 Other Backbones (GAN / FNO / Physics-informed / Flow / Diffusion)](#35-other-backbones-gan-fno-physics-informed-flow-diffusion)
+  - [3.6 Backbone-agnostic / Plug-in Modules (Losses / Training Strategies)](#36-backbone-agnostic-plug-in-modules-losses-training-strategies)
+- [4. Registration / Motion / Deformation](#4-registration-motion-deformation)
   - [4.1 CNN-based](#41-cnn-based)
   - [4.2 ViT-based](#42-vit-based)
-  - [4.3 Mamba / SSM-based](#43-mamba--ssm-based)
+  - [4.3 Mamba / SSM-based](#43-mamba-ssm-based)
   - [4.4 Hybrid](#44-hybrid)
   - [4.5 Other Backbones](#45-other-backbones)
-- [5. Classification / Detection / Diagnosis](#5-classification--detection--diagnosis)
+- [5. Classification / Detection / Diagnosis](#5-classification-detection-diagnosis)
   - [5.1 CNN-based](#51-cnn-based)
   - [5.2 ViT-based](#52-vit-based)
-  - [5.3 Mamba / SSM-based](#53-mamba--ssm-based)
-  - [5.4 Hybrid](#54-hybrid)
-  - [5.5 Other Backbones](#55-other-backbones)
-- [6. Self-supervised / Pretraining / Domain Generalization](#6-self-supervised--pretraining--domain-generalization)
+  - [5.3 Mamba / SSM-based](#53-mamba-ssm-based)
+  - [5.4 Hybrid (Graph / Multimodal / Others)](#54-hybrid-graph-multimodal-others)
+  - [5.5 Other Backbones / Plug-in Frequency Modules](#55-other-backbones-plug-in-frequency-modules)
+- [6. Self-supervised / Pretraining / Domain Generalization](#6-self-supervised-pretraining-domain-generalization)
   - [6.1 Frequency-based SSL objectives](#61-frequency-based-ssl-objectives)
-  - [6.2 Frequency augmentation & invariance](#62-frequency-augmentation--invariance)
-  - [6.3 Robustness under domain shift](#63-robustness-under-domain-shift)
+  - [6.2 Frequency augmentation & invariance](#62-frequency-augmentation-invariance)
+  - [6.3 Robustness under domain shift (DG / DA / Federated)](#63-robustness-under-domain-shift-dg-da-federated)
 - [7. Foundation Models](#7-foundation-models)
-  - [7.1 Segmentation FM + Frequency Adapters](#71-segmentation-fm--frequency-adapters)
-  - [7.2 Reconstruction / Diffusion FM + Frequency Constraints](#72-reconstruction--diffusion-fm--frequency-constraints)
-  - [7.3 VLM / Prompting + Frequency Priors](#73-vlm--prompting--frequency-priors)
-- [8. Datasets & Benchmarks](#8-datasets--benchmarks)
+  - [7.1 Segmentation FM + Frequency Adapters](#71-segmentation-fm-frequency-adapters)
+  - [7.2 Reconstruction / Diffusion FM + Frequency Constraints](#72-reconstruction-diffusion-fm-frequency-constraints)
+  - [7.3 VLM / Prompting + Frequency Priors](#73-vlm-prompting-frequency-priors)
+- [8. Datasets & Benchmarks](#8-datasets-benchmarks)
 - [9. Implementation Notes](#9-implementation-notes)
 - [10. Index](#10-index)
   - [10.1 Index by Frequency Transform](#101-index-by-frequency-transform)
   - [10.2 Index by Backbone](#102-index-by-backbone)
-  - [10.3 Index by Injection / Usage](#103-index-by-injection--usage)
+  - [10.3 Index by Injection / Usage](#103-index-by-injection-usage)
 - [11. Contributing](#11-contributing)
 - [12. Citation](#12-citation)
+
 
 ---
 
@@ -966,16 +967,19 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 - `[Explain]`:
 
 ---
-
 ## 11. Contributing
-**Entry requirements**
-- Title + Venue/Year
-- `Tags:` 至少包含 1 个频域变换标签 + 1 个注入方式标签
-- `Task:` 与 `Backbone:` 必填
-- Code / Data 若未知可留空，但建议补全
 
-**Dedup rule**
-- 同一工作：优先收录正式版本（conference/journal），arXiv 作为补充链接放同条目内。
+Entry requirements
+
+- Title + venue/year
+- `Tags:` at least **1 frequency transform tag** + **1 injection/usage tag**
+- `Task:` and `Backbone:` are required
+- Code / data links are optional but highly recommended
+
+Dedup rule
+
+- For the same work, prefer the official **conference/journal** version;
+  arXiv can be added as an extra link in the same entry.
 
 ---
 
