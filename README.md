@@ -66,7 +66,7 @@
 
 ---
 
-## 0. Scope How to Use
+## 0. Scope & How to Use
 This repository curates **frequency-domain (spectral) methods for medical imaging**, including **transforms, plug-in modules, losses, and augmentations** used across tasks such as segmentation, reconstruction/SR, denoising/enhancement, registration, and classification.
 
 **How to use**
