@@ -108,7 +108,10 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 - `[SpectralConv]` Spectral convolution (FFT-based conv, Fourier layers)
 - `[LearnableFreq]` Learnable frequency filters / adaptive spectral gating
 - `[HybridFreq]` Hybrid transforms / mixed spectral operators
+- `[DTCWT]` Dual-Tree Complex Wavelet Transform
+- `[LaplacianPyr]` Laplacian pyramid / frequency decomposition (pyramid-based)
 
+  
 ### Injection / Usage Tags
 - `[Input]` input-level transform / pre-processing
 - `[Feature]` feature-level spectral branch / frequency-path
@@ -122,6 +125,9 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 - `[Selection]` adaptive transform selection / routing (MoE, gating, Gumbel, etc.)
 - `[Fusion]` multi-transform fusion / collaboration (e.g., FFT + DCT + DWT)
 - `[Explain]` interpretability / spectral attribution / frequency response analysis
+- `[Consistency]` frequency-domain consistency regularization (SSL/UDA/DG)
+- `[Prompt]` frequency-domain prompting (e.g., Fourier-space prompts)
+
 
 ### Modality / Dim Tags
 - Modalities: `[MRI] [CT] [US] [Xray] [PET] [Microscopy]`
@@ -138,31 +144,102 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 ## 1. Segmentation
 
 ### 1.1 CNN-based
-- <!-- Example -->
-- **[TITLE]** (VENUE, YEAR) — takeaway.  
-  `Tags:` [DWT][Feature][MultiScale][CT][2D] | `Task:` Seg | `Backbone:` CNN  
-  `Code:`  | `Data:`  | `Notes:`  
+- **Wavelet U-Net for Medical Image Segmentation** (MICCAI, 2020) — Replaces pooling/upsampling with DWT/IWT to reduce information loss.  
+  `Tags:` [DWT][Feature][MultiScale] | `Task:` Seg | `Backbone:` CNN/U-Net  
+  `Paper:` https://dl.acm.org/doi/10.1007/978-3-030-61609-0_63
+
+- **GFUNet: A Global-Frequency-Domain Network for Medical Image Segmentation** (Computers in Biology and Medicine, 2023) — Uses Fourier-domain/global filtering to improve efficiency and accuracy in UNet-style segmentation.  
+  `Tags:` [FFT][Feature] | `Task:` Seg | `Backbone:` CNN/U-Net  
+  `Paper:` https://www.sciencedirect.com/science/article/abs/pii/S0010482523007552  
+  `PubMed:` https://pubmed.ncbi.nlm.nih.gov/37579584/
+
+- **PFESA: FFT-based Parameter-Free Edge and Structure Attention** (MICCAI, 2025) — Parameter-free FFT decoupling for edge (high-freq) vs structure (low-freq) to improve skip connections.  
+  `Tags:` [FFT][Feature][Explain] | `Task:` Seg | `Backbone:` CNN/U-Net  
+  `Paper:` https://papers.miccai.org/miccai-2025/paper/3694_paper.pdf
+
+- **FFTMed: Leveraging Fast Fourier Transform for a Lightweight Medical Image Segmentation Network** (Scientific Reports, 2025) — U-shaped network operating in Fourier domain with frequency modules and anti-aliasing aggregation.  
+  `Tags:` [FFT][Feature] | `Task:` Seg | `Backbone:` CNN/U-Net  
+  `Paper:` https://www.nature.com/articles/s41598-025-21799-5
+
+- **Exploring a Frequency-Domain Attention-Guided Cascade U-Net for Medical Image Segmentation** (Computers in Biology and Medicine, 2023) — Cascade design with frequency-domain attention modules for segmentation.  
+  `Tags:` [FFT][Attention][Feature] | `Task:` Seg | `Backbone:` CNN/U-Net  
+  `Paper:` https://www.sciencedirect.com/science/article/abs/pii/S0010482523011137
+
+- **Wavelet U-Net++ for Accurate Lung Nodule Segmentation** (Biomedical Signal Processing and Control, 2024) — Combines U-Net++ with wavelet operations for better boundary/detail recovery.  
+  `Tags:` [DWT][Feature][MultiScale] | `Task:` Seg | `Backbone:` CNN/U-Net++  
+  `Paper:` https://www.sciencedirect.com/science/article/abs/pii/S1746809423009424
+
 
 ### 1.2 ViT-based
-- **[TITLE]** (VENUE, YEAR) — takeaway.  
-  `Tags:` [FFT][Attention][Fusion][MRI][3D] | `Task:` Seg | `Backbone:` ViT  
-  `Code:`  | `Data:`  | `Notes:`  
+- **WaveFormer: A 3D Transformer with Wavelet-Driven Feature Representation for Efficient Medical Image Segmentation** (MICCAI, 2025) — Uses DWT partitioning (low/high sub-bands) and inverse wavelet upsampling for efficient 3D segmentation.  
+  `Tags:` [DWT][TokenMix][MultiScale] | `Task:` Seg | `Backbone:` ViT/Transformer  
+  `Paper:` https://papers.miccai.org/miccai-2025/1014-Paper4968.html  
+  `ArXiv:` https://arxiv.org/abs/2503.23764
+
+- **FreqFiT: Boosting Parameter-Efficient Foundation Model Adaptation via Frequency-based Fine-Tuning** (MICCAI, 2025) — Inserts a frequency-based fine-tuning module between ViT blocks for better adaptation in 2D/3D medical segmentation.  
+  `Tags:` [FFT][Feature][Prompt] | `Task:` Seg | `Backbone:` ViT/Foundation  
+  `Paper:` https://papers.miccai.org/miccai-2025/paper/3066_paper.pdf
+
+- **EFMS-Net: Efficient Frequency-Enhanced Multi-Scale Network for Medical Image Segmentation** (MICCAI, 2025) — Frequency-enhanced multi-scale design for segmentation (CT/MRI use-cases in paper).  
+  `Tags:` [FFT][Feature][MultiScale] | `Task:` Seg | `Backbone:` ViT/CNN-Hybrid  
+  `Paper:` https://papers.miccai.org/miccai-2025/paper/3331_paper.pdf
+
 
 ### 1.3 Mamba / SSM-based
-- **[TITLE]** (VENUE, YEAR) — takeaway.  
-  `Tags:` [DCT][TokenMix][Selection][US][2D] | `Task:` Seg | `Backbone:` Mamba/SSM  
-  `Code:`  | `Data:`  | `Notes:`  
+- **WMC-Net: Wavelet-Enhanced Mamba with Contextual Fusion Network for Medical Image Segmentation** (Knowledge-Based Systems, 2025) — Enhances Mamba/SSM segmentation with wavelet-based frequency cues and contextual fusion.  
+  `Tags:` [DWT][Feature][Fusion] | `Task:` Seg | `Backbone:` Mamba/SSM  
+  `Paper:` https://www.sciencedirect.com/science/article/abs/pii/S0950705125021690
+
 
 ### 1.4 Hybrid
-- **[TITLE]** (VENUE, YEAR) — takeaway.  
-  `Tags:` [HybridFreq][Fusion][Feature][CT][3D] | `Task:` Seg | `Backbone:` Hybrid  
-  `Code:`  | `Data:`  | `Notes:`  
+- **WMREN: Wavelet Multi-scale Region-Enhanced Network for Medical Image Segmentation** (IJCAI, 2025) — Collaborative downsampling combining wavelet transform + CNN for multi-scale feature retention.  
+  `Tags:` [DWT][Fusion][MultiScale] | `Task:` Seg | `Backbone:` Hybrid (CNN + Wavelet)  
+  `Paper:` https://www.ijcai.org/proceedings/2025/0187.pdf
+
+- **UWT-Net: Mining Low-Frequency Feature Information for Medical Image Segmentation** (MICCAI, 2025) — Wavelet-transform driven frequency decomposition to mine low-frequency structure cues.  
+  `Tags:` [DWT][Feature][MultiScale] | `Task:` Seg | `Backbone:` Hybrid  
+  `Paper:` https://papers.miccai.org/miccai-2025/paper/1637_paper.pdf
+
+- **Frequency-domain Multi-modal Fusion for Language-guided Medical Image Segmentation (FMISeg)** (MICCAI, 2025) — Frequency-domain interaction for language-guided medical segmentation.  
+  `Tags:` [FFT][Fusion][Feature] | `Task:` Seg | `Backbone:` Hybrid / Vision-Language  
+  `Paper:` https://papers.miccai.org/miccai-2025/paper/3678_paper.pdf
+
 
 ### 1.5 Other Backbones
-- <!-- e.g., UNet variants with special mixers, graph nets, implicit nets -->
+- **Adaptive wavelet-VNet for Single-Sample Test-Time Adaptation** (IEEE TMI, 2024) — Test-time adaptation that leverages wavelet cues for robustness in segmentation.  
+  `Tags:` [DWT][Aug][Consistency] | `Task:` Seg | `Backbone:` V-Net (3D CNN)  
+  `Paper:` https://pmc.ncbi.nlm.nih.gov/articles/PMC11656288/
 
-### 1.6 Backbone-agnostic / Plug-in Modules
-- <!-- Frequency plug-ins reusable across backbones (adapters, spectral gates, routing, losses) -->
+- **Active Contour Model Combining Frequency Domain Information for Medical Image Segmentation** (Pattern Recognition, 2025) — Classical segmentation enhanced with Fourier/frequency-domain information.  
+  `Tags:` [FFT][Explain] | `Task:` Seg | `Backbone:` Classical (Active Contour)  
+  `Paper:` https://www.sciencedirect.com/science/article/abs/pii/S0031320325007861
+
+
+### 1.6 Backbone-agnostic / Plug-in Modules (SSL / UDA / DG / PEFT)
+- **FRCNet: Frequency and Region Consistency for Semi-Supervised Medical Image Segmentation** (MICCAI, 2024) — Adds frequency-domain consistency + multi-granularity region similarity consistency.  
+  `Tags:` [FFT][Consistency][Loss] | `Task:` Seg | `Backbone:` Plug-in (SSL)  
+  `Paper:` https://papers.miccai.org/miccai-2024/340-Paper0245.html
+
+- **AdaptFRCNet: Semi-supervised Adaptation of Pre-trained Model with Frequency and Region Consistency** (Medical Image Analysis, 2025) — Extends FRC-style constraints for adapting pre-trained models under limited labels.  
+  `Tags:` [FFT][Consistency][Loss] | `Task:` Seg | `Backbone:` Plug-in (Adaptation)  
+  `Paper:` https://www.sciencedirect.com/science/article/abs/pii/S1361841525001732
+
+- **Generalizable Medical Image Segmentation via Random Amplitude Mixup (RAM)** (ECCV, 2022) — Fourier transform on source images and mix low-frequency amplitude to improve domain generalization.  
+  `Tags:` [FFT][Aug][Consistency] | `Task:` Seg | `Backbone:` Plug-in (DG)  
+  `Paper:` https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136810415.pdf
+
+- **FVP: Fourier Visual Prompting for Source-Free UDA of Medical Image Segmentation** (IEEE TMI, 2023) — Learns a low-frequency Fourier-space visual prompt to steer a frozen model on target domain.  
+  `Tags:` [FFT][Prompt][Consistency] | `Task:` Seg | `Backbone:` Plug-in (SFUDA)  
+  `ArXiv:` https://arxiv.org/abs/2304.13672
+
+- **Curriculum-Based Augmented Fourier Domain Adaptation (CAFDA)** (arXiv, 2023) — Curriculum in Fourier amplitude transfer; validated on multi-domain medical segmentation (e.g., retina/nuclei).  
+  `Tags:` [FFT][Aug][Consistency] | `Task:` Seg | `Backbone:` Plug-in (DG/DA)  
+  `Paper:` https://arxiv.org/pdf/2306.03511
+
+- **Improving Medical Image Segmentation with Implicit Representations (HFNM uses wavelet decomposition)** (MICCAI, 2025) — Includes a high-frequency module that decomposes images via wavelets and perturbs high-frequency components.  
+  `Tags:` [DWT][Loss][Explain] | `Task:` Seg | `Backbone:` Plug-in / Hybrid  
+  `Paper:` https://papers.miccai.org/miccai-2025/paper/0665_paper.pdf
+
 
 ---
 
