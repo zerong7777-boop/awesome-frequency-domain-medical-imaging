@@ -1,6 +1,6 @@
 # Awesome Frequency-Domain Methods for Medical Imaging
 
-**Last updated:** 2025-12-18  
+**Last updated:** 2026-1-2  
 
 
 ---
@@ -227,6 +227,10 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
   `Tags:` [FFT][Fusion][Feature] | `Task:` Seg | `Backbone:` Hybrid / Vision-Language  
   [[MICCAI 2025](https://papers.miccai.org/miccai-2025/paper/3678_paper.pdf)]
 
+
+- **FaRMamba: Frequency-based learning and Reconstruction aided Mamba for Medical Segmentation** (ICONIP, 2025) 
+  `Tags:` [FFT][DWT][DCT][Feature] | `Task:` Seg | `Backbone:` Hybrid (CNN + Mamba) 
+  [[ArXiv 2025](https://arxiv.org/abs/2507.20056)] [[Code](https://github.com/zerong7777-boop/FaRMamba)]
 
 ### 1.5 Other Backbones
 - **Adaptive Wavelet-VNet for Single-Sample Test-Time Adaptation** (IEEE TMI, 2024) — Test-time adaptation that leverages wavelet cues for robustness under distribution shift.  
