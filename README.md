@@ -91,8 +91,15 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 - Untraceable engineering notes (no paper/tech report, unclear method).
 - Works where “frequency” is only a vague description without an explicit spectral operator.
 
-**Start Here (TODO)**
-- Add 5–10 essential reads with one-line rationale + tags.
+**Start Here**
+- [GFUNet](https://www.sciencedirect.com/science/article/abs/pii/S0010482523007552) — a concise entry point for FFT-based global filtering in medical image segmentation. `[FFT][Feature][Seg]`
+- [WavTrans](https://doi.org/10.1007/978-3-031-16446-0_44) — combines wavelet decomposition, cross-attention, and multi-contrast MRI super-resolution. `[DWT][Attention][SR]`
+- [k-Space Deep Learning](https://doi.org/10.1109/TMI.2019.2927101) — a direct k-space learning reference for accelerated MRI reconstruction. `[FFT][K-space][Recon]`
+- [Wavelet-Improved Score-Based Generative Model](https://doi.org/10.1109/TMI.2023.3325824) — connects wavelet representations with score-based medical image restoration. `[DWT][MultiScale][Diffusion]`
+- [Fourier-Net](https://doi.org/10.1609/aaai.v37i1.25182) — represents deformation fields with a compact Fourier basis for fast registration. `[FFT][Feature][Reg]`
+- [FoPro-KD](https://doi.org/10.1109/TMI.2023.3327428) — uses Fourier prompts for knowledge distillation in long-tailed medical recognition. `[FFT][Prompt][Cls]`
+- [FedDG](https://openaccess.thecvf.com/content/CVPR2021/html/Liu_FedDG_Federated_Domain_Generalization_on_Medical_Image_Segmentation_via_Episodic_CVPR_2021_paper.html) — shows frequency-space augmentation for cross-site federated generalization. `[FFT][Aug][DG]`
+- [FreqFiT](https://papers.miccai.org/miccai-2025/paper/3066_paper.pdf) — introduces frequency-aware parameter-efficient adaptation for medical foundation models. `[FFT][Feature][PEFT]`
 
 ---
 
@@ -111,6 +118,8 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 - `[HybridFreq]` Hybrid transforms / mixed spectral operators
 - `[DTCWT]` Dual-Tree Complex Wavelet Transform
 - `[LaplacianPyr]` Laplacian pyramid / frequency decomposition (pyramid-based)
+- `[FrFT]` Fractional Fourier Transform
+- `[GraphWavelet]` Spectral graph wavelet transform
 
   
 ### Injection / Usage Tags
@@ -236,9 +245,9 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
   [[MICCAI 2025](https://papers.miccai.org/miccai-2025/paper/3678_paper.pdf)]
 
 
-- **FaRMamba: Frequency-based learning and Reconstruction aided Mamba for Medical Segmentation** (ICONIP, 2025) 
-  `Tags:` [FFT][DWT][DCT][Feature] | `Task:` Seg | `Backbone:` Hybrid (CNN + Mamba) 
-  [[ArXiv 2025](https://arxiv.org/abs/2507.20056)] [[Code](https://github.com/zerong7777-boop/FaRMamba)]
+- **FaRMamba: Frequency-Based Learning and Reconstruction Aided Mamba for Medical Segmentation** (ICONIP, 2025)  
+  `Tags:` [FFT][DWT][DCT][Feature] | `Task:` Seg | `Backbone:` Hybrid (CNN + Mamba)  
+  [[ICONIP 2025](https://doi.org/10.1007/978-981-95-4445-5_19)] [[arXiv 2025](https://arxiv.org/abs/2507.20056)] [[Code](https://github.com/zerong7777-boop/FaRMamba)]
 
 ### 1.5 Other Backbones
 - **Adaptive Wavelet-VNet for Single-Sample Test-Time Adaptation** (IEEE TMI, 2024) — Test-time adaptation that leverages wavelet cues for robustness under distribution shift.  
@@ -271,9 +280,9 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
   `Tags:` [FFT][Prompt][Consistency] | `Task:` Seg | `Backbone:` Plug-in (SFUDA)  
   [[IEEE TMI 2023](https://doi.org/10.1109/TMI.2023.3306105)] [[arXiv 2023](https://arxiv.org/abs/2304.13672)]
 
-- **Curriculum-Based Augmented Fourier Domain Adaptation (CAFDA)** (arXiv, 2023) — Curriculum-based Fourier amplitude transfer for robust medical image segmentation across domains.  
+- **Curriculum-Based Augmented Fourier Domain Adaptation for Robust Medical Image Segmentation** (IEEE T-ASE, 2024) — Curriculum-based Fourier amplitude transfer for robust medical image segmentation across domains.  
   `Tags:` [FFT][Aug][Consistency] | `Task:` Seg | `Backbone:` Plug-in (DG/DA)  
-  [[arXiv 2023](https://arxiv.org/pdf/2306.03511)]
+  [[IEEE T-ASE 2024](https://doi.org/10.1109/TASE.2023.3295600)] [[arXiv 2023](https://arxiv.org/abs/2306.03511)] [[Code](https://github.com/lofrienger/Curri-AFDA)]
 
 - **Improving Medical Image Segmentation with Implicit Representations (HFNM uses wavelet decomposition)** (MICCAI, 2025) — Includes a high-frequency module that decomposes images via wavelets and perturbs high-frequency components to regularize training.  
   `Tags:` [DWT][Loss][Explain] | `Task:` Seg | `Backbone:` Plug-in / Hybrid  
@@ -299,18 +308,18 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
   [[Neural Networks 2023](https://doi.org/10.1016/j.neunet.2023.07.005)]
 
 - **Deep Learning-based Computed Tomographic Image Super-Resolution via Wavelet Embedding** (Radiation Physics and Chemistry, 2023) — Uses wavelet embedding for CT SR, emphasizing high- vs low-frequency components through learned subband fusion.  
-  `Tags:` [DWT][Wavelet][Embedding] | `Task:` SR | `Modality:` CT | `Backbone:` CNN  
+  `Tags:` [DWT][Feature][Wavelet][Embedding] | `Task:` SR | `Modality:` CT | `Backbone:` CNN  
   [[Radiation Physics and Chemistry 2023](https://doi.org/10.1016/j.radphyschem.2022.110718)]
 
 
 ### 2.2 ViT-based
 
 - **WavTrans: Synergizing Wavelet and Cross-Attention Transformer for Multi-contrast MRI Super-Resolution** (MICCAI, 2022) — Combines wavelet-domain decomposition with cross-attention Transformer blocks for arbitrary-scale SR on multi-contrast MRI.  
-  `Tags:` [DWT][Wavelet][Transformer][MultiDomain] | `Task:` SR | `Modality:` MRI | `Backbone:` ViT/Transformer  
+  `Tags:` [DWT][Attention][Fusion][Wavelet][Transformer][MultiDomain] | `Task:` SR | `Modality:` MRI | `Backbone:` ViT/Transformer  
   [[MICCAI 2022](https://conferences.miccai.org/2022/papers/560-Paper1064.html)] [[DOI](https://doi.org/10.1007/978-3-031-16446-0_44)] [[Code](https://github.com/XAIMI-Lab/WavTrans)]
 
 - **Cross-Fusion Adaptive Feature Enhancement Transformer: Efficient High-Frequency Integration and Sparse Attention Enhancement for Brain MRI Super-Resolution** (Computer Methods and Programs in Biomedicine, 2025) — Transformer that explicitly models high-frequency components via cross-fusion and sparse attention to enhance fine anatomical details.  
-  `Tags:` [HighFreq][Transformer][Attention] | `Task:` SR | `Modality:` MRI | `Backbone:` ViT/Transformer  
+  `Tags:` [LearnableFreq][HighFreq][Attention][Transformer] | `Task:` SR | `Modality:` MRI | `Backbone:` ViT/Transformer  
   [[Computer Methods and Programs in Biomedicine 2025](https://doi.org/10.1016/j.cmpb.2025.108815)]
 
 
@@ -324,7 +333,7 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 ### 2.4 Hybrid (Spatial + Frequency / Multi-Branch)
 
 - **Synthesized 7T MRI from 3T MRI via Deep Learning in Spatial and Wavelet Domains** (Medical Image Analysis, 2020) — Two-branch network operating in spatial and wavelet domains, jointly reconstructing 7T-like MR volumes from 3T scans.  
-  `Tags:` [DWT][Wavelet][MultiDomain][SR] | `Task:` SR | `Modality:` MRI (3T→7T) | `Backbone:` CNN (Dual-branch)  
+  `Tags:` [DWT][Fusion][Wavelet][MultiDomain][SR] | `Task:` SR | `Modality:` MRI (3T→7T) | `Backbone:` CNN (Dual-branch)  
   [[Med Image Anal 2020](https://doi.org/10.1016/j.media.2019.101663)]
 
 - **A Novel Hybrid Generative Adversarial Network for CT and MRI Super-Resolution Reconstruction** (Physics in Medicine & Biology, 2023) — Hybrid frequency–spatial GAN: complex residual U-Net in the Fourier domain + enhanced residual U-Net in image domain, trained with frequency-domain and perceptual losses.  
@@ -332,7 +341,7 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
   [[Physics in Medicine & Biology 2023](https://doi.org/10.1088/1361-6560/acdc7e)] [[PubMed](https://pubmed.ncbi.nlm.nih.gov/37285848/)]
 
 - **DC-WCNN: A Deep Cascade of Wavelet-Based Convolutional Neural Networks for MR Image Reconstruction** (IEEE ISBI, 2020) — Multi-stage cascade where each stage performs wavelet-domain refinement plus image-domain correction, effectively unrolling a multi-resolution reconstruction process.  
-  `Tags:` [DWT][Wavelet][Cascade] | `Task:` Recon | `Modality:` MRI | `Backbone:` CNN (Unrolled)  
+  `Tags:` [DWT][Feature][Wavelet][Cascade] | `Task:` Recon | `Modality:` MRI | `Backbone:` CNN (Unrolled)  
   [[IEEE ISBI 2020](https://doi.org/10.1109/ISBI45749.2020.9098418)]
 
 - **R2B-WFC Ultrasound Reconstruction: Wavelet Fourier Convolution-based Reconstruction from Radio Frequency to Image** (MICCAI, 2025) — Reconstructs B-mode ultrasound images from radio-frequency signals with wavelet Fourier convolution.  
@@ -343,27 +352,27 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 ### 2.5 Other Backbones (Diffusion / GAN / Etc.)
 
 - **High-Frequency Space Diffusion Model for Accelerated MRI** (IEEE TMI, 2024) — Diffusion model that operates in a learned high-frequency space to reconstruct under-sampled MRI with improved texture and edge fidelity.  
-  `Tags:` [HighFreq][Diffusion][Kspace] | `Task:` Recon | `Modality:` MRI | `Backbone:` Diffusion  
+  `Tags:` [FFT][K-space][HighFreq][Diffusion] | `Task:` Recon | `Modality:` MRI | `Backbone:` Diffusion  
   [[IEEE TMI 2024](https://doi.org/10.1109/TMI.2024.3351702)] [[Code](https://github.com/Aboriginer/HFS-SDE)]
 
 - **DISGAN: Wavelet-Informed Discriminator Guides GAN to MRI Super-Resolution with Noise Cleaning** (ICCV Workshops, 2023) — Uses wavelet-domain inputs in the discriminator to better distinguish high-frequency anatomical details from artifacts, improving GAN-based SR.  
-  `Tags:` [DWT][Wavelet][GAN][NoiseClean] | `Task:` SR | `Modality:` MRI | `Backbone:` GAN  
+  `Tags:` [DWT][Feature][Wavelet][GAN][NoiseClean] | `Task:` SR | `Modality:` MRI | `Backbone:` GAN  
   [[ICCV Workshops 2023](https://openaccess.thecvf.com/content/ICCV2023W/CVAMD/html/Wang_DISGAN_Wavelet-Informed_Discriminator_Guides_GAN_to_MRI_Super-Resolution_with_Noise_ICCVW_2023_paper.html)] [[DOI](https://doi.org/10.1109/ICCVW60793.2023.00259)] [[Code](https://github.com/wqlevi/DISGAN)]
 
 - **Generative Super-Resolution PET Imaging with Fourier Diffusion Models** (SPIE Medical Imaging, 2025) — Fourier-domain conditional diffusion that models PET images in frequency space to generate SR PET from low-dose/low-res inputs.  
-  `Tags:` [FFT][Diffusion][PET] | `Task:` SR | `Modality:` PET | `Backbone:` Diffusion  
+  `Tags:` [FFT][Feature][Diffusion][PET] | `Task:` SR | `Modality:` PET | `Backbone:` Diffusion  
   [[SPIE Medical Imaging 2025](https://doi.org/10.1117/12.3048849)] [[arXiv 2025](https://arxiv.org/abs/2502.15055)]
 
 - **WiD-PET: PET Image Reconstruction from Low-Dose Data Using a Wavelet-Informed Diffusion Model with Fast Inference** (MICCAI, 2025) — Uses a wavelet-informed diffusion model and high-frequency enhancement for fast low-dose PET reconstruction.  
-  `Tags:` [DWT][Diffusion][PET][LowDose] | `Task:` Recon | `Modality:` PET | `Backbone:` Diffusion  
+  `Tags:` [DWT][MultiScale][Diffusion][PET][LowDose] | `Task:` Recon | `Modality:` PET | `Backbone:` Diffusion  
   [[MICCAI 2025](https://papers.miccai.org/miccai-2025/1020-Paper0455.html)] [[DOI](https://doi.org/10.1007/978-3-032-05325-1_65)] [[Code](https://github.com/SwingM/WiD.git)]
 
 - **Learning Fourier-Constrained Diffusion Bridges for MRI Reconstruction** (IEEE TMI, 2026) — Constrains diffusion-bridge MRI reconstruction with Fourier-domain structure to improve spectral fidelity.  
-  `Tags:` [FFT][Diffusion][MRI] | `Task:` Recon | `Modality:` MRI | `Backbone:` Diffusion  
+  `Tags:` [FFT][Loss][Diffusion][MRI] | `Task:` Recon | `Modality:` MRI | `Backbone:` Diffusion  
   [[IEEE TMI 2026](https://ieeexplore.ieee.org/document/11433825)] [[DOI](https://doi.org/10.1109/TMI.2026.3673956)]
 
 - **PWD: Prior-Aware Wavelet Diffusion for Efficient Dental Limited-Angle CT Reconstruction** (IEEE TMI, 2026) — Uses wavelet-domain diffusion priors for efficient dental limited-angle CT reconstruction.  
-  `Tags:` [DWT][Diffusion][CT] | `Task:` Recon | `Modality:` Dental CT | `Backbone:` Diffusion  
+  `Tags:` [DWT][MultiScale][Diffusion][CT] | `Task:` Recon | `Modality:` Dental CT | `Backbone:` Diffusion  
   [[IEEE TMI 2026](https://ieeexplore.ieee.org/document/11408153)] [[DOI](https://doi.org/10.1109/TMI.2026.3667384)]
 
 - **Ensemble and Low-Frequency Mixing with Diffusion Models for Accelerated MRI Reconstruction** (Medical Image Analysis, 2025) — Applies adaptive low-frequency mixing during reverse diffusion for accelerated MRI reconstruction from undersampled k-space.  
@@ -374,7 +383,7 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 ### 2.6 Backbone-agnostic / Plug-in Modules
 
 - **Fourier Convolution Block (FCB) with Global Receptive Field for MRI Reconstruction** (Medical Image Analysis, 2025) — Plug-in Fourier convolution layer that replaces/augments standard convolutions to capture global context in k-space while remaining compatible with U-Net-style recon networks.  
-  `Tags:` [FFT][SpectralConv][Plugin][Global][Conv] | `Task:` Recon | `Modality:` MRI | `Backbone:` Any (U-Net / Unrolled / GAN)  
+  `Tags:` [FFT][SpectralConv][Feature][Plugin][Global][Conv] | `Task:` Recon | `Modality:` MRI | `Backbone:` Any (U-Net / Unrolled / GAN)  
   [[MedIA 2025](https://www.sciencedirect.com/science/article/pii/S1361841524002743)] [[DOI](https://doi.org/10.1016/j.media.2024.103349)] [[Code](https://github.com/Haozhoong/FCB)]
 
 - **Memory-Enhanced and Multi-Domain Learning-Based Deep Unrolling Network for Medical Image Reconstruction** (Physics in Medicine & Biology, 2025) — Deep unrolling framework that adds a frequency-domain consistency module; can be viewed as a spectral regulariser attachable to other learned recon pipelines.  
@@ -385,19 +394,19 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 ### 2.7 K-space / Complex-specific
 
 - **k-Space Deep Learning for Accelerated MRI** (IEEE TMI, 2020) — Pioneering work that directly learns a mapping from sub-sampled k-space to fully-sampled k-space, followed by image-domain conversion, explicitly modelling aliasing in the frequency domain.  
-  `Tags:` [Kspace][FFT][Complex][DataConsistency] | `Task:` Recon | `Modality:` MRI | `Backbone:` CNN  
+  `Tags:` [FFT][K-space][Complex][DataConsistency] | `Task:` Recon | `Modality:` MRI | `Backbone:` CNN  
   [[IEEE TMI 2020](https://doi.org/10.1109/TMI.2019.2927101)] [[Code](https://github.com/jongcye/kspace.deeplearning.MRI)]
 
 - **Undersampled MRI Reconstruction Based on Spectral Graph Wavelet Transform** (Computers in Biology and Medicine, 2023) — Designs a graph-based k-space model where spectral graph wavelet transform recovers missing k-space samples using graph spectral priors.  
-  `Tags:` [GraphWavelet][Kspace][Sparse] | `Task:` Recon | `Modality:` MRI | `Backbone:` Graph/CNN  
+  `Tags:` [GraphWavelet][K-space][Sparse] | `Task:` Recon | `Modality:` MRI | `Backbone:` Graph/CNN  
   [[Comput Biol Med 2023](https://doi.org/10.1016/j.compbiomed.2023.106644)]
 
 - **AFTNet: Artificial Fourier Transform Network for Deep Learning-Based MRI Reconstruction** (Computers in Biology and Medicine, 2025) — Complex-valued network that learns an “artificial” Fourier transform, operating directly on k-space and image space to improve reconstruction of under-sampled MRI.  
-  `Tags:` [FFT][Complex][Kspace][MultiDomain] | `Task:` Recon | `Modality:` MRI | `Backbone:` CNN  
+  `Tags:` [FFT][Complex][K-space][Fusion][MultiDomain] | `Task:` Recon | `Modality:` MRI | `Backbone:` CNN  
   [[Comput Biol Med 2025](https://doi.org/10.1016/j.compbiomed.2025.108711)]
 
 - **Super-Resolution for MRI Using Phase-Scrambling Fourier Transform Imaging and Unrolling Model-Based Network** (IEEE Access, 2023) — Integrates phase-scrambling Fourier imaging with an unrolled deep network, effectively performing SR by modelling the acquisition physics in k-space.  
-  `Tags:` [FFT][PSFT][Unrolled][SR] | `Task:` Recon/SR | `Modality:` MRI | `Backbone:` Model-based + CNN  
+  `Tags:` [FFT][K-space][PSFT][Unrolled][SR] | `Task:` Recon/SR | `Modality:` MRI | `Backbone:` Model-based + CNN  
   [[IEEE Access 2023](https://doi.org/10.1109/ACCESS.2023.3314505)]
 
 - **Wavelet-driven Decoupling and Physics-informed Mapping Network for Accelerated Multi-parametric MR Imaging** (MICCAI, 2025) — Combines wavelet-driven decoupling with physics-informed mapping for accelerated multi-parametric MRI reconstruction.  
@@ -423,11 +432,11 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
   `Links:` [[IEEE TMI 2018](https://doi.org/10.1109/TMI.2018.2823756)]
 
 - **Wavelet Subband-Specific Learning for Low-Dose CT Image Denoising** (PLOS ONE, 2022) — Uses stationary wavelet transform (SWT) to decompose LDCT images into subbands and trains subband-specific CNN branches with an additional frequency-domain loss to avoid over-smoothing and better restore texture.  
-  `Tags:` [SWT][Subband][Loss] | `Task:` Denoise (LDCT) | `Backbone:` CNN  
+  `Tags:` [DWT][SWT][Subband][Loss] | `Task:` Denoise (LDCT) | `Backbone:` CNN  
   `Links:` [[PLOS ONE 2022](https://doi.org/10.1371/journal.pone.0274308)]
 
 - **An Image Denoising Technique Using Wavelet-Anisotropic Gaussian Filter-Based Denoising Convolutional Neural Network for CT Images** (Applied Sciences, 2023) — Combines discrete wavelet transform and anisotropic Gaussian filtering with a CNN denoiser, explicitly separating frequency components before deep reconstruction.  
-  `Tags:` [DWT][Preproc][Hybrid] | `Task:` Denoise (LDCT) | `Backbone:` CNN  
+  `Tags:` [DWT][Input][Preproc][Hybrid] | `Task:` Denoise (LDCT) | `Backbone:` CNN  
   `Links:` [[Applied Sciences 2023](https://doi.org/10.3390/app132112069)]
 
 - **FMUnet: Frequency Feature Enhancement Multi-Level U-Net for Low-Dose CT Denoising with a Real Collected LDCT Image Dataset** (LNCS, 2024) — Adds FFT-based frequency-domain loss and feature-enhancement blocks to a multi-level U-Net, encouraging restoration of missing high-frequency information in LDCT images.  
@@ -450,32 +459,32 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
   `Links:` [[QIMS 2025](https://qims.amegroups.org/article/view/140132)] [[DOI](https://doi.org/10.21037/qims-2024-2368)] [[Code](https://github.com/xiaoludiver/WFTUNet)]
 
 - **Semi-Supervised Spatial-Frequency Transformer for Metal Artifact Reduction in Maxillofacial CT and Evaluation with Intraoral Scan** (European Journal of Radiology, 2025) — Builds a dual-branch spatial–frequency transformer where a frequency-pathway explicitly models Fourier-domain information to suppress streak artifacts in cone-beam CT, under limited labels.  
-  `Tags:` [FFT][MultiDomain][SemiSup] | `Task:` Artifact (MAR) | `Backbone:` Transformer  
+  `Tags:` [FFT][Fusion][MultiDomain][SemiSup] | `Task:` Artifact (MAR) | `Backbone:` Transformer  
   `Links:` [[European Journal of Radiology 2025](https://doi.org/10.1016/j.ejrad.2025.112087)]
 
 - **FD-DiT: Frequency Domain-Directed Diffusion Transformer for Low-Dose CT Reconstruction** (arXiv, 2025) — A diffusion–Transformer hybrid that guides the generative process via frequency-domain priors to recover fine anatomical details from LDCT scans.  
-  `Tags:` [FFT][Diffusion][Transformer] | `Task:` Denoise / Enhance (LDCT) | `Backbone:` Diffusion Transformer  
+  `Tags:` [FFT][Feature][Diffusion][Transformer] | `Task:` Denoise / Enhance (LDCT) | `Backbone:` Diffusion Transformer  
   `Links:` [[arXiv 2025](https://arxiv.org/abs/2506.23466)]
 
 ### 3.3 Mamba / SSM-based
 
 - **CT-Mamba: A Hybrid Convolutional State Space Model for Low-Dose CT Denoising** (Computerized Medical Imaging and Graphics, 2025) — Combines convolution and Mamba-style state space blocks, and designs a deep noise power spectrum (NPS) loss in the frequency domain to better match realistic CT noise textures.  
-  `Tags:` [SSM][FFT][NPSLoss] | `Task:` Denoise (LDCT) | `Backbone:` CNN + Mamba  
+  `Tags:` [FFT][Loss][NPSLoss][SSM] | `Task:` Denoise (LDCT) | `Backbone:` CNN + Mamba  
   `Links:` [[CMIG 2025](https://doi.org/10.1016/j.compmedimag.2025.102595)] [[arXiv 2024](https://arxiv.org/abs/2411.07930)] [[Code](https://github.com/linxuan-li/CT-Mamba)]
 
 - **Wavelet-Enhanced Residual Optimal Transport for Mamba-Based Image Restoration in Photoacoustic Tomography** (Photoacoustics, 2025) — Uses wavelet-enhanced residual optimal transport together with Mamba blocks to address limited-view artifacts and noise in photoacoustic tomography, explicitly manipulating multi-scale frequency content.  
-  `Tags:` [DWT][SSM][Artifact] | `Task:` Denoise / Artifact (PAT) | `Backbone:` Mamba / Hybrid  
+  `Tags:` [DWT][MultiScale][SSM][Artifact] | `Task:` Denoise / Artifact (PAT) | `Backbone:` Mamba / Hybrid  
   `Links:` [[Photoacoustics 2025](https://doi.org/10.1016/j.pacs.2025.100749)]
 
 
 ### 3.4 Hybrid (Multi-domain / Unrolled / Model-based + Deep)
 
 - **TDMAR-Net: A Frequency-Aware Tri-Domain Diffusion Network for CT Metal Artifact Reduction** (Physics in Medicine & Biology, 2025) — Diffusion model that simultaneously leverages priors in the projection, image, and Fourier domains to suppress metal artifacts and restore CT image quality.  
-  `Tags:` [FFT][Projection][Diffusion] | `Task:` Artifact (MAR) | `Backbone:` Hybrid (Projection + Image + k-space)  
+  `Tags:` [FFT][Fusion][Projection][Diffusion] | `Task:` Artifact (MAR) | `Backbone:` Hybrid (Projection + Image + frequency)  
   `Links:` [[Physics in Medicine & Biology 2025](https://doi.org/10.1088/1361-6560/ae0efc)]
 
 - **Low-Dose CT Imaging via Cascaded ResUnet with Spectrum Loss** (Methods, 2022) — A 3D cascaded ResUNet trained with a modified noise power spectrum loss computed in the Fourier domain, explicitly penalizing mismatched frequency content to reduce streaks and structured noise.  
-  `Tags:` [FFT][NPSLoss][Artifact] | `Task:` Denoise / Enhance (LDCT) | `Backbone:` CNN (Cascaded)  
+  `Tags:` [FFT][Loss][NPSLoss][Artifact] | `Task:` Denoise / Enhance (LDCT) | `Backbone:` CNN (Cascaded)  
   `Links:` [[Methods 2022](https://doi.org/10.1016/j.ymeth.2021.05.005)] [[PubMed](https://pubmed.ncbi.nlm.nih.gov/33992773/)]
 
 - **FIND-Net: Fourier-Integrated Network with Dictionary Kernels for Metal Artifact Reduction** (MICCAI, 2025) — Uses fast Fourier convolution and trainable frequency filtering to reduce CT metal artifacts.  
@@ -486,23 +495,23 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 ### 3.5 Other Backbones (GAN / FNO / Physics-informed / Flow / Diffusion)
 
 - **WGAN-DUS: Ultrasound Speckle Reduction Using Wavelet-Based Generative Adversarial Network** (IEEE JBHI, 2022) — Applies discrete wavelet transform to decompose ultrasound images into subbands and uses a GAN with wavelet reconstruction modules for real-time despeckling while preserving boundary contrast.  
-  `Tags:` [DWT][GAN][Subband] | `Task:` Denoise (US Speckle) | `Backbone:` GAN  
+  `Tags:` [DWT][Feature][GAN][Subband] | `Task:` Denoise (US Speckle) | `Backbone:` GAN  
   `Links:` [[IEEE JBHI 2022](https://doi.org/10.1109/JBHI.2022.3144628)] [[PubMed](https://pubmed.ncbi.nlm.nih.gov/35077370/)]
 
 - **SELFNet: Denoising Shear Wave Elastography Using Spatial-Temporal Fourier Feature Networks** (Ultrasound in Medicine & Biology, 2024) — Physics-informed neural network that injects random Fourier features in space–time to estimate and denoise displacement fields in shear wave elastography while enforcing governing PDE constraints.  
-  `Tags:` [FFT][FourierFeatures][PINN] | `Task:` Denoise (US SWE) | `Backbone:` Physics-Informed NN  
+  `Tags:` [FFT][FourierFeatures][Feature][PINN] | `Task:` Denoise (US SWE) | `Backbone:` Physics-Informed NN  
   `Links:` [[Ultrasound in Medicine & Biology 2024](https://doi.org/10.1016/j.ultrasmedbio.2024.08.004)] [[PubMed](https://pubmed.ncbi.nlm.nih.gov/39317627/)]
 
 - **Medical Image Joint Deringing and Denoising Using Fourier Neural Operator** (ICBSP, 2023) — Uses Fourier Neural Operators operating in k-space to jointly remove Gibbs ringing and noise from MR images, learning integral operators directly in the frequency domain.  
-  `Tags:` [FFT][FNO][Kspace] | `Task:` Denoise / Artifact (MRI Gibbs) | `Backbone:` FNO  
+  `Tags:` [FFT][K-space][FNO] | `Task:` Denoise / Artifact (MRI Gibbs) | `Backbone:` FNO  
   `Links:` [[ICBSP 2023](https://doi.org/10.1145/3634875.3634881)]
 
-- **Frequency-Domain Flow Matching for Real-World Ultra-Low-Dose Lung CT Denoising** (arXiv, 2025) — Constructs an image purification pipeline and a flow-matching generative model operating in the frequency domain to better preserve anatomical structure under severe noise and misalignment.  
-  `Tags:` [FFT][Flow][Generative] | `Task:` Denoise (uLDCT) | `Backbone:` Flow / Generative  
-  `Links:` [[arXiv 2025](https://arxiv.org/abs/2510.07492)]
+- **A Denoising Framework for Real-World Ultra-Low-Dose Lung CT Images Based on an Image Purification Strategy** (ICIC, 2026) — Combines image purification with a frequency-domain flow-matching model to preserve anatomical structure under severe noise and misalignment.  
+  `Tags:` [FFT][Feature][Flow][Generative] | `Task:` Denoise (uLDCT) | `Backbone:` Flow / Generative  
+  `Links:` [[ICIC 2026](https://doi.org/10.1007/978-981-92-3410-3_7)] [[arXiv 2025](https://arxiv.org/abs/2510.07492)]
 
 - **Wavelet-Improved Score-Based Generative Model for Medical Imaging** (IEEE TMI, 2024) — Incorporates wavelet transforms into a score-based diffusion model to more flexibly control multi-scale frequency content in medical image restoration tasks (denoising, enhancement).  
-  `Tags:` [DWT][Diffusion][Generative] | `Task:` Denoise / Enhance (Multi-modality) | `Backbone:` Score-based Diffusion  
+  `Tags:` [DWT][MultiScale][Diffusion][Generative] | `Task:` Denoise / Enhance (Multi-modality) | `Backbone:` Score-based Diffusion  
   `Links:` [[IEEE TMI 2024](https://doi.org/10.1109/TMI.2023.3325824)] [[PubMed](https://pubmed.ncbi.nlm.nih.gov/38469054/)]
 
 
@@ -519,11 +528,11 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 > **Survey:** *A Systematic Review of Deep Learning-Based Denoising for Low-Dose Computed Tomography from a Perceptual Quality Perspective* (Biomedical Engineering Letters, 2024) reviews frequency-domain, edge, perceptual, and adversarial losses for LDCT denoising. [[Full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC11502640/)] [[DOI](https://doi.org/10.1007/s13534-024-00419-7)]
 
 - **A Frequency-Aware Self-Supervised Learning for Ultra-Wide-Field Image Enhancement** (MICCAI, 2025) — Uses frequency-aware self-supervised learning and frequency-decoupled restoration for ultra-wide-field retinal image enhancement.  
-  `Tags:` [FFT][SSL][Deblur][Retina] | `Task:` Enhance (UWF) | `Backbone:` Plug-in / Training Strategy  
+  `Tags:` [FFT][Feature][SSL][Deblur][Retina] | `Task:` Enhance (UWF) | `Backbone:` Plug-in / Training Strategy  
   `Links:` [[MICCAI 2025](https://papers.miccai.org/miccai-2025/0013-Paper2387.html)] [[DOI](https://doi.org/10.1007/978-3-032-05169-1_1)]
 
 - **FedFDD: Federated Learning with Frequency Domain Decomposition for Low-Dose CT Denoising** (MIDL, 2024) — Decomposes LDCT images into frequency components with adaptive DCT masking for federated denoising across clients.  
-  `Tags:` [DCT][Fed][Denoising][LowDose] | `Task:` Denoise (LDCT) | `Backbone:` Plug-in / Federated  
+  `Tags:` [DCT][Selection][Fed][Denoising][LowDose] | `Task:` Denoise (LDCT) | `Backbone:` Plug-in / Federated  
   `Links:` [[MIDL 2024](https://proceedings.mlr.press/v250/chen24a.html)] [[Code](https://github.com/xuhang2019/FedFDD)]
 
 - **A Multi-Degradation Fundus Image Restoration Network Guided by Frequency Prompt** (IEEE TMI, 2026) — Uses frequency prompts to guide restoration under multiple fundus image degradations.  
@@ -537,11 +546,11 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 
 ### 4.1 CNN-based
 - **Fourier-Net: Fast Image Registration with Band-Limited Deformation** (AAAI, 2023) — U-Net–style encoder that predicts a low-dimensional, band-limited representation of the deformation field in the Fourier domain, decoded by a parameter-free FFT-based model-driven decoder for fast 2D/3D registration.  
-  `Tags:` [FFT][KSpace][ModelDriven][3D] | `Task:` Reg | `Backbone:` CNN/U-Net  
+  `Tags:` [FFT][Feature][ModelDriven][3D] | `Task:` Reg | `Backbone:` CNN/U-Net  
   [[AAAI 2023](https://dl.acm.org/doi/10.1609/aaai.v37i1.25182)] [[arXiv](https://arxiv.org/abs/2211.16342)] [[Code](https://github.com/xi-jia/Fourier-Net)]
 
 - **RegFSC-Net: Medical Image Registration via Fourier Transform With Spatial Reorganization and Channel Refinement Network** (IEEE J-BHI, 2024) — Extends band-limited Fourier deformable models with spatial feature reorganization and channel-refinement modules for accurate 3D brain registration.  
-  `Tags:` [FFT][KSpace][Channel][3D] | `Task:` Reg | `Backbone:` CNN/U-Net  
+  `Tags:` [FFT][Feature][Channel][3D] | `Task:` Reg | `Backbone:` CNN/U-Net  
   [[IEEE J-BHI 2024](https://dblp.org/rec/journals/titb/LiuHXSZZ24.html)]
 
 - **Wavelet-Guided Multi-Scale ConvNeXt for Unsupervised Medical Image Registration (WaveMorph)** (Bioengineering, 2025) — ConvNeXt-based unsupervised registration; applies DWT at multiple scales, feeding low-frequency sub-images to a multi-scale network and using wavelet-derived constraints to refine local deformations.  
@@ -555,27 +564,23 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 
 ### 4.2 ViT-based
 - **FractMorph: A Fractional Fourier-Based Multi-Domain Transformer for Deformable Image Registration** (arXiv, 2025) — 3D dual-stream Transformer where Fractional Cross-Attention branches apply fractional Fourier transforms at multiple angles plus a log-magnitude branch to jointly capture local, semi-global, and global matching cues.  
-  `Tags:` [FrFT][FFT][MultiDomain][Transformer][3D] | `Task:` Reg | `Backbone:` ViT/Transformer + CNN head  
+  `Tags:` [FrFT][FFT][Fusion][MultiDomain][Transformer][3D] | `Task:` Reg | `Backbone:` ViT/Transformer + CNN head  
   [[arXiv 2025](https://arxiv.org/abs/2508.12445)] [[Code](https://github.com/shayankebriti/FractMorph)]
 
 - **EFormer: Efficient Transformer for Medical Image Registration Based on Frequency Division and Board Attention** (Computer Science, 2024) — Transformer-based registration model that divides features into different frequency bands and applies “board attention” to balance low- vs high-frequency cues.  
-  `Tags:` [FFT][FrequencyDivision][Transformer] | `Task:` Reg | `Backbone:` ViT/Transformer  
+  `Tags:` [FFT][Attention][FrequencyDivision][Transformer] | `Task:` Reg | `Backbone:` ViT/Transformer  
   [[Computer Science 2024](https://doaj.org/article/cbc720f8b5f04cb0abe694c919e59e4f)]
 
 
 ### 4.3 Mamba / SSM-based
-- **MambaMorph: Mamba-Based Deformable Medical Image Registration with an Annotated Brain MR–CT Dataset** (Computerized Medical Imaging and Graphics, 2025) — Replaces CNN encoders with Mamba SSM blocks to better capture long-range dependencies in 3D MR–CT registration.  
-  `Tags:` [SSM][Mamba][3D][MultiModal] | `Task:` Reg | `Backbone:` Mamba/SSM  
-  [[CMIG 2025](https://doi.org/10.1016/j.compmedimag.2025.102566)] [[Code](https://github.com/Guo-Stone/MambaMorph)]
-
 - **Associating Frequency-Aware MambaMorph and Diffusion for 4D Volumetric Image Synthesis** (SSRN, 2025) — Builds a frequency-aware MambaMorph-based registration model using spatially adaptive low-pass and high-pass filtering inside a diffusion pipeline to synthesize 4D radiotherapy volumes with realistic motion.  
-  `Tags:` [FFT][Mamba][Diffusion][4D][Motion] | `Task:` Motion / 4D Reg | `Backbone:` Mamba/SSM + Diffusion  
+  `Tags:` [FFT][Feature][Mamba][Diffusion][4D][Motion] | `Task:` Motion / 4D Reg | `Backbone:` Mamba/SSM + Diffusion  
   [[SSRN 2025](https://ssrn.com/abstract=5134459)]
 
 
 ### 4.4 Hybrid
 - **Dual-Domain Framework for Multimodal Medical Image Registration via Local Phase Consistency and Gradient-Intensity Mutual Information** (Biomedical Signal Processing and Control, 2024) — Combines spatial-domain gradients with frequency-domain local phase consistency (log-Gabor/phase-based features) to improve multimodal registration robustness to intensity and contrast changes.  
-  `Tags:` [FFT][Phase][MultiModal][Hybrid] | `Task:` Reg | `Backbone:` Hybrid (Hand-crafted + DL-ready)  
+  `Tags:` [FFT][Fusion][Phase][MultiModal][Hybrid] | `Task:` Reg | `Backbone:` Hybrid (Hand-crafted + DL-ready)  
   [[Biomed Signal Process Control 2024](https://doi.org/10.1016/j.bspc.2024.106629)]
 
 - **Deformable Medical Image Registration Based on Wavelet Transform and Linear Attention** (Biomedical Signal Processing and Control, 2024) — Fuses wavelet-based multi-scale features with linear self-attention to model large and complex deformations, mixing CNN-style local modeling with Transformer-style global interactions.  
@@ -585,15 +590,15 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 
 ### 4.5 Other Backbones
 - **Fast Diffeomorphic Image Registration via Fourier-Approximated Lie Algebras (FLASH)** (IJCV, 2019) — Geodesic-shooting framework where the Lie algebra of velocity fields is approximated by a low-dimensional, band-limited Fourier basis, performing most computations in frequency space.  
-  `Tags:` [FFT][Diffeomorphic][ModelDriven] | `Task:` Reg | `Backbone:` Variational / LDDMM  
+  `Tags:` [FFT][Feature][Diffeomorphic][ModelDriven] | `Task:` Reg | `Backbone:` Variational / LDDMM  
   [[IJCV 2019](https://link.springer.com/article/10.1007/s11263-018-1130-5)]
 
 - **Medical Image Registration in Fractional Fourier Transform Domain** (Optik, 2013) — Fractional Fourier domain registration that improves robustness to noise and some geometric distortions compared to standard Fourier correlation.  
-  `Tags:` [FrFT][Classical][Optimization] | `Task:` Reg | `Backbone:` Analytical  
+  `Tags:` [FrFT][Input][Classical][Optimization] | `Task:` Reg | `Backbone:` Analytical  
   [[Optik 2013](https://doi.org/10.1016/j.ijleo.2013.01.021)]
 
 - **Variational Image Registration by a Total Fractional-Order Regularization Approach** (Journal of Computational Physics, 2015) — Variational registration with total fractional-order regularization; fractional derivatives are implemented in the frequency domain, acting as spectral smoothness priors on the deformation field.  
-  `Tags:` [FractionalOrder][SpectralReg][Variational] | `Task:` Reg | `Backbone:` PDE / Variational  
+  `Tags:` [FFT][Loss][FractionalOrder][SpectralReg][Variational] | `Task:` Reg | `Backbone:` PDE / Variational  
   [[J Comput Phys 2015](https://doi.org/10.1016/j.jcp.2014.10.050)]
 
 
@@ -640,19 +645,19 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 
 ### 5.4 Hybrid (Graph / Multimodal / Others)
 
-- **MS-GWNN: Multi-Scale Graph Wavelet Neural Network for Breast Cancer Diagnosis** (IEEE ISBI / arXiv, 2020–2022) — Converts histopathology images into graphs and performs multi-scale graph wavelet convolutions to capture structural tissue patterns for breast cancer grading/diagnosis.  
+- **MS-GWNN: Multi-Scale Graph Wavelet Neural Network for Breast Cancer Diagnosis** (IEEE ISBI, 2022) — Converts histopathology images into graphs and performs multi-scale graph wavelet convolutions to capture structural tissue patterns for breast cancer grading/diagnosis.  
   `Tags:` [GraphWavelet][MultiScale][Graph] | `Task:` Cls (Breast Histopathology) | `Backbone:` GCN / Graph Wavelet Network  
-  `Refs:` [[arXiv 2020](https://arxiv.org/abs/2012.14619)]
+  `Refs:` [[IEEE ISBI 2022](https://doi.org/10.1109/ISBI52829.2022.9761464)] [[arXiv 2020](https://arxiv.org/abs/2012.14619)]
 
 ### 5.5 Other Backbones / Plug-in Frequency Modules
 
 - **FoPro-KD: Fourier Prompted Effective Knowledge Distillation for Long-Tailed Medical Image Recognition** (IEEE TMI, 2024) — Introduces a Fourier Prompt Generator that perturbs specific frequency bands in input images to expose teacher frequency preferences and guide KD, improving long-tailed GI and skin lesion recognition.  
   `Tags:` [FFT][Prompt][KD] | `Task:` Cls (Long-Tailed) | `Backbone:` Backbone-agnostic (Teacher/Student CNN or ViT)  
-  `Refs:` [[IEEE TMI 2024](https://arxiv.org/abs/2305.17421)]
+  `Refs:` [[IEEE TMI 2024](https://doi.org/10.1109/TMI.2023.3327428)] [[PubMed](https://pubmed.ncbi.nlm.nih.gov/37878457/)] [[arXiv 2023](https://arxiv.org/abs/2305.17421)] [[Code](https://github.com/xmed-lab/FoPro-KD)]
 
 
 - **Enhancing Breast Cancer Classification Using a Deep Sparse Wavelet Autoencoder Approach** (Scientific Reports, 2025) — Uses wavelet transforms and a sparse autoencoder to construct compact frequency-domain representations, followed by a classifier for multi-class breast cancer recognition.  
-  `Tags:` [DWT][AutoEncoder][Sparse] | `Task:` Cls (Breast Cancer) | `Backbone:` Wavelet Autoencoder + Classifier  
+  `Tags:` [DWT][Feature][AutoEncoder][Sparse] | `Task:` Cls (Breast Cancer) | `Backbone:` Wavelet Autoencoder + Classifier  
   `Refs:` [[Scientific Reports 2025](https://www.nature.com/articles/s41598-025-11816-y)]
 
 - **Frequency-Aware B-Line and Pleural Line Analysis in Lung Ultrasound Videos** (IEEE JBHI, 2026) — Uses DWT-based dual-component frequency feature enhancement with temporal attention for B-line and pleural-line analysis in lung ultrasound videos.  
@@ -706,7 +711,7 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 ### 6.3 Robustness under domain shift (DG / DA / Federated)
 
 - **FedDG: Federated Domain Generalization on Medical Image Segmentation via Episodic Learning in Continuous Frequency Space** (CVPR, 2021) — Exchanges amplitude spectra across clients and performs continuous frequency-space interpolation plus episodic meta-learning to improve cross-hospital generalization.  
-  `Tags:` [FFT][DG][Fed] | `Task:` FedDG-Seg | `Backbone:` CNN/U-Net  
+  `Tags:` [FFT][Aug][DG][Fed] | `Task:` FedDG-Seg | `Backbone:` CNN/U-Net  
   `Paper:` [[CVPR 2021](https://openaccess.thecvf.com/content/CVPR2021/html/Liu_FedDG_Federated_Domain_Generalization_on_Medical_Image_Segmentation_via_Episodic_CVPR_2021_paper.html)]
 
 - **Frequency-mixed Single-Source Domain Generalization for Medical Image Segmentation (FreeSDG)** (MICCAI, 2023) — Uses frequency-mixed augmentation to diversify style from a single labeled source, with regularizers to preserve semantic structure while varying appearance.  
@@ -714,11 +719,11 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
   `Paper:` [[MICCAI 2023](https://link.springer.com/chapter/10.1007/978-3-031-43901-8_13)]
 
 - **MFNet: Meta-learning based on Frequency-Space Mix for MRI Image Segmentation** (Frontiers in Oncology, 2023) — Mixes features in frequency space within a meta-learning loop to improve cross-scanner robustness for nasopharyngeal carcinoma MRI.  
-  `Tags:` [FFT][DG][Meta][Mix] | `Task:` DG-Seg (MRI) | `Backbone:` CNN/UNet  
+  `Tags:` [FFT][Aug][DG][Meta][Mix] | `Task:` DG-Seg (MRI) | `Backbone:` CNN/UNet  
   `Paper:` [[Front Oncol 2023](https://www.frontiersin.org/articles/10.3389/fonc.2023.1247263/full)]
 
 - **Domain-Specific Convolution and High-Frequency Reconstruction-based Unsupervised Domain Adaptation for Medical Image Segmentation** (MICCAI, 2022) — Introduces domain-specific convolution branches and high-frequency reconstruction losses to better align structural details across domains in UDA.  
-  `Tags:` [FFT][DA][Recons] | `Task:` UDA-Seg | `Backbone:` CNN/UNet  
+  `Tags:` [FFT][Loss][DA][Recons] | `Task:` UDA-Seg | `Backbone:` CNN/UNet  
   `Paper:` [[MICCAI 2022](https://link.springer.com/chapter/10.1007/978-3-031-16434-7_76)]
 
 - **MoreStyle: Relax Low-frequency Constraint of Fourier-based Image Reconstruction in Generalizable Medical Image Segmentation** (MICCAI, 2024) — Revisits Fourier-based reconstruction for SDG, relaxing “low-frequency only” constraints and adding uncertainty-aware weighting to strengthen robustness on multi-site fundus and prostate segmentation.  
@@ -734,32 +739,27 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 
 - **I-MedSAM: Implicit Medical Image Segmentation with Segment Anything** — ECCV 2024  
   Leverages a SAM-based encoder with a frequency adapter that aggregates high-frequency information in the spectral domain and an implicit neural representation (INR) decoder for continuous masks.  
-  `Tags:` [FFT][Adapter][HighFreq][INR] | `Task:` Seg | `Backbone:` SAM + INR  
+  `Tags:` [FFT][Feature][Adapter][HighFreq][INR] | `Task:` Seg | `Backbone:` SAM + INR  
   [[ECCV 2024](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/01503.pdf)] [[arXiv](https://arxiv.org/abs/2311.17081)] [[code](https://github.com/ucwxb/I-MedSAM)]
 
 - **FreqSAM2-UNet: Adapter Fine-Tuning Frequency-Aware Network of SAM2 for Universal Medical Segmentation** — ICIC 2025 (LNCS)  
   Freezes the SAM2 Hiera encoder and adds frequency-aware adapters plus adaptive high/low-pass filters during feature fusion to preserve high-frequency boundaries.  
-  `Tags:` [FFT][Adapter][Hi/LoPass] | `Task:` Seg | `Backbone:` SAM2 + U-Net  
+  `Tags:` [FFT][Feature][Adapter][Hi/LoPass] | `Task:` Seg | `Backbone:` SAM2 + U-Net  
   [[ICIC 2025](https://link.springer.com/chapter/10.1007/978-981-95-0036-9_26)]
-
-- **UltraSam: A Foundation Model for Ultrasound using Large Open-Access Segmentation Datasets** — Expert Systems with Applications, 2025  
-  SAM-style ultrasound foundation model trained on US-43d; combines prompt-conditioned segmentation with modality-specific features (including frequency-domain cues) and supports prompted classification.  
-  `Tags:` [FFT?][Prompt][FM][Ultrasound] | `Task:` Seg / Cls | `Backbone:` SAM-style ViT  
-  [[ESWA 2025](https://www.sciencedirect.com/science/article/abs/pii/S0957417425038382)] [[arXiv](https://arxiv.org/abs/2411.16222)] [[code](https://github.com/CAMMA-public/UltraSam)]
 
 - **FreqFiT: Frequency Strikes Back – Boosting Parameter-Efficient Foundation Model Adaptation for Medical Imaging** — MICCAI 2025 (Oral)  
   Inserts an FFT-based fine-tuning block between ViT layers to modulate token spectra, improving PEFT (e.g., LoRA) when adapting MedMAE / DINOv2-style vision FMs for 2D/3D medical segmentation and classification.  
-  `Tags:` [FFT][PEFT][Adapter][GlobalContext] | `Task:` Seg / Cls | `Backbone:` ViT / FM  
+  `Tags:` [FFT][Feature][PEFT][Adapter][GlobalContext] | `Task:` Seg / Cls | `Backbone:` ViT / FM  
   [[MICCAI 2025](https://papers.miccai.org/miccai-2025/paper/3066_paper.pdf)] [[arXiv](https://arxiv.org/abs/2411.19297)] [[code](https://github.com/tsly123/FreqFiT_medical)]
 
 - **VP-SAM: Video Polyp Segmentation with Fourier Spectrum-guided SAM Adapters** — ECCV 2024  
   Uses Fourier amplitude-based semantic disentanglement adapters on top of SAM for colonoscopy video segmentation; a prototype for frequency-guided prompting around a segmentation FM.  
-  `Tags:` [FFT][Adapter][Video][Polyp] | `Task:` Seg | `Backbone:` SAM  
+  `Tags:` [FFT][Feature][Adapter][Video][Polyp] | `Task:` Seg | `Backbone:` SAM  
   [[ECCV 2024](https://www.ecva.net)]  <!-- official link to be filled once stable -->
   
 - **RobustSAM: Degradation-Robust Segment Anything via Fourier Degradation Suppression** — CVPR 2024  
   Adds a Fourier Degradation Suppression (FDS) module to SAM to mitigate blur/noise and distribution shift, improving robustness of FM-based segmentation under degraded imaging — potentially useful for low-dose / noisy medical scans.  
-  `Tags:` [FFT][Robust][Adapter] | `Task:` Generic Seg | `Backbone:` SAM  
+  `Tags:` [FFT][Feature][Robust][Adapter] | `Task:` Generic Seg | `Backbone:` SAM  
   [[CVPR 2024](https://openaccess.thecvf.com)]  <!-- generic FM + Fourier robustness -->
 
 
@@ -769,23 +769,23 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 
 - **FilterDiff: Noise-Free Frequency-Domain Diffusion Models for Accelerated MRI Reconstruction** — MICCAI 2025  
   Models the diffusion process as a learned frequency-domain filtering operation (instead of Gaussian noise injection), aligning the forward / reverse process with MRI acquisition and enforcing spectral fidelity.  
-  `Tags:` [FFT][Filter][Diffusion][k-space] | `Task:` MRI Recon | `Backbone:` Frequency-domain Diffusion  
+  `Tags:` [FFT][K-space][Feature][Filter][Diffusion] | `Task:` MRI Recon | `Backbone:` Frequency-domain Diffusion  
   [[MICCAI 2025](https://papers.miccai.org/miccai-2025/paper/1256_paper.pdf)]
 
 - **Fourier Diffusion Models: A Method to Control MTF and NPS in Medical Imaging** — 2025  
   Parameterizes diffusion models in the Fourier domain to explicitly control modulation transfer function (MTF) and noise power spectrum (NPS), enabling reconstruction FMs whose spatial resolution / noise characteristics are tunable by design.  
-  `Tags:` [Fourier][MTF][NPS][Theory] | `Task:` Recon / Sim | `Backbone:` Diffusion (Fourier-param.)  
+  `Tags:` [FFT][Feature][MTF][NPS][Theory] | `Task:` Recon / Sim | `Backbone:` Diffusion (Fourier-param.)  
   [[Journal Article](https://pmc.ncbi.nlm.nih.gov/articles/PMC12619680/)]
 
-- **Zero-shot Medical Image Translation via Frequency-Guided Diffusion Models (FGDM)** — IEEE TMI, 2023  
+- **Zero-Shot Medical Image Translation via Frequency-Guided Diffusion Models (FGDM)** — IEEE TMI, 2024  
   Introduces frequency-domain filters as guidance signals in the diffusion process for cross-modality CT/CBCT/MR translation under zero-shot setting, preserving anatomical structures via spectral constraints.  
-  `Tags:` [FFT][Filter][Translation][ZeroShot] | `Task:` Cross-modality Translation / Recon | `Backbone:` Diffusion  
-  [[IEEE TMI 2023](https://arxiv.org/abs/2304.02742)] [[code](https://github.com/Kent0n-Li/FGDM)]
+  `Tags:` [FFT][Input][Filter][Translation][ZeroShot] | `Task:` Cross-modality Translation / Recon | `Backbone:` Diffusion  
+  [[IEEE TMI 2024](https://doi.org/10.1109/TMI.2023.3325703)] [[PubMed](https://pubmed.ncbi.nlm.nih.gov/37851552/)] [[arXiv 2023](https://arxiv.org/abs/2304.02742)] [[code](https://github.com/Kent0n-Li/FGDM)]
 
-- **Prior Frequency Guided Diffusion Model for Limited Angle (LA)-CBCT Reconstruction (PFGDM)** — Physics in Medicine & Biology, 2024 (to appear)  
+- **Prior Frequency Guided Diffusion Model for Limited Angle (LA)-CBCT Reconstruction (PFGDM)** — Physics in Medicine & Biology, 2024  
   Conditions a diffusion prior on high-frequency information from prior CT scans; uses decaying HF conditioning to reconstruct LA-CBCT while preserving fine anatomical details.  
-  `Tags:` [FFT][Prior][k-space][Diffusion] | `Task:` CBCT Recon | `Backbone:` Conditional Diffusion  
-  [[arXiv 2024](https://arxiv.org/abs/2404.01448)]
+  `Tags:` [FFT][Input][Prior][Diffusion] | `Task:` CBCT Recon | `Backbone:` Conditional Diffusion  
+  [[Physics in Medicine & Biology 2024](https://doi.org/10.1088/1361-6560/ad580d)] [[PubMed](https://pubmed.ncbi.nlm.nih.gov/38870947/)] [[arXiv 2024](https://arxiv.org/abs/2404.01448)]
 
 > You can treat this subsection as “frequency-aware diffusion / generative FMs for reconstruction / translation” and cross-reference Section 2 for more task-specific models.
 
@@ -794,7 +794,7 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 
 - **FreqFiT (revisited)** — MICCAI 2025  
   Frequency-based fine-tuning module for ViT FMs, compatible with visual prompt tuning / LoRA; naturally pairs with language-conditioned or report-conditioned medical FMs where visual backbone is ViT.  
-  `Tags:` [FFT][PEFT][PromptReady] | `Task:` Seg / Cls | `Backbone:` ViT FM  
+  `Tags:` [FFT][Feature][PEFT][PromptReady] | `Task:` Seg / Cls | `Backbone:` ViT FM  
   [[MICCAI 2025](https://papers.miccai.org/miccai-2025/paper/3066_paper.pdf)] [[code](https://github.com/tsly123/FreqFiT_medical)]
 
 - **FMISeg: Frequency-domain Multi-modal Fusion for Language-guided Medical Image Segmentation** — MICCAI 2025  
@@ -803,11 +803,6 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
   [[MICCAI 2025](https://papers.miccai.org/miccai-2025/paper/3678_paper.pdf)]
 
 > **Cross-reference:** FVP is listed with its canonical source-free adaptation entry in Section 1.6.
-
-- **UltraSam (prompted classification)** — ESWA, 2025  
-  Extends SAM-style segmentation FM to “prompted classification” by jointly decoding prompts and image features; while not explicitly frequency-prompted, it is a natural host for future frequency-aware prompts (e.g., combining with FreqFiT / FVP-like modules).  
-  `Tags:` [Prompt][FM][Ultrasound][Future-Freq] | `Task:` Prompted Cls / Seg | `Backbone:` SAM-style ViT  
-  [[ESWA 2025](https://www.sciencedirect.com/science/article/abs/pii/S0957417425038382)] [[arXiv](https://arxiv.org/abs/2411.16222)]
 
 
 ---
@@ -1046,7 +1041,7 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
   - **Reconstruction / SR**:  
     WavTrans (MICCAI 2022), CFAFET and related SR Transformers (CMPB 2025).  
   - **Foundation / Prompting**:  
-    FreqFiT (FM adapter), FMISeg (vision–language), UltraSam-style prompted models (Secs. 7.1–7.3).
+    FreqFiT (FM adapter), FMISeg (vision–language), and FVP (frequency prompting) (Secs. 1.6 and 7.1–7.3).
 
 - **Mamba / SSM**  
   - **Segmentation**:  
@@ -1067,7 +1062,7 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
   - **Classical**: Active Contour + frequency (Pattern Recognit 2025).  
   - **Plug-in modules**: FRCNet, AdaptFRCNet, RAM, FVP, CAFDA, HFNM, FedFDD, frequency-prompt fundus restoration,  
     and other frequency-based SSL / DG / UDA methods (Secs. 1.6, 3.6, 6.1–6.3).  
-  - **FM adapters / prompts**: FreqFiT, FMISeg, FVP, UltraSam (Secs. 7.1–7.3).
+  - **FM adapters / prompts**: FreqFiT, FMISeg, FVP (Secs. 1.6 and 7.1–7.3).
 
 ---
 
