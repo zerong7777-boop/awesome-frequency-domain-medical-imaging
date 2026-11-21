@@ -1,6 +1,6 @@
 # Awesome Frequency-Domain Methods for Medical Imaging
 
-**Last updated:** 2026-11-21
+**Last updated:** 2026-11-22
 
 
 ---
@@ -12,6 +12,9 @@
   - [Injection / Usage Tags](#injection--usage-tags)
   - [Modality / Dim Tags](#modality--dim-tags)
   - [Entry Template](#entry-template)
+- [0.2 Visual Overview](#02-visual-overview)
+  - [Method Taxonomy](#method-taxonomy)
+  - [Frequency Integration Strategies](#frequency-integration-strategies)
 - [1. Segmentation](#1-segmentation)
   - [1.1 CNN-based](#11-cnn-based)
   - [1.2 ViT-based](#12-vit-based)
@@ -154,6 +157,24 @@ This repository curates **frequency-domain (spectral) methods for medical imagin
 - **Paper Title** (Venue, Year) — one-line takeaway.  
   `Tags:` [FFT][Feature][Fusion][MRI][3D] | `Task:` Seg | `Backbone:` ViT  
   `Code:` (link) | `Data:` (datasets) | `Notes:` (ablation/highlight)
+
+---
+
+## 0.2 Visual Overview
+
+### Method Taxonomy
+
+[![Taxonomy of spectral representations and operators, frequency integration mechanisms, and medical imaging applications](assets/figures/frequency-domain-taxonomy.png)](assets/figures/frequency-domain-taxonomy.png)
+
+Spectral representations and operators, integration mechanisms, medical imaging tasks, model architectures, and learning paradigms.
+
+### Frequency Integration Strategies
+
+[![Eight frequency integration strategies covering augmentation, spectral features, attention, fusion, losses, routing, prompting, and MRI k-space processing](assets/figures/frequency-integration-strategies.png)](assets/figures/frequency-integration-strategies.png)
+
+Input augmentation, spectral feature learning, attention and fusion, spectral losses, adaptive routing, prompting and adapters, and MRI k-space processing.
+
+Both figures are provided as **5544 × 2772 PNGs at 300 DPI**. Select either image to view the full-resolution version.
 
 ---
 
